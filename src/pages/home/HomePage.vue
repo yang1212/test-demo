@@ -1,13 +1,16 @@
 <template>
   <div class="page1-box">
     <div class="video-list">
-      <div class="list-title">name1</div>
+      <div class="list-title">name1
+        {{list}}
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import getFlightDetail from '@/service/common.js'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Home',
@@ -18,10 +21,18 @@ export default {
   created() {
     this.getListData()
   },
+  computed: {
+    ...mapGetters('flightModule', [
+      'list'
+    ]),
+  },
   methods: {
+    ...mapActions('flightModule', [
+      'updateListAction'
+    ]),
     async getListData() {
       let res = await getFlightDetail()
-      console.log(res)
+      this.updateListAction(res)
     }
   }
 }
