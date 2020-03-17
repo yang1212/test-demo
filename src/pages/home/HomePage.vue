@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import getFlightDetail from '@/service/common.js'
+import getFlightDetail from '@/service/common'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {

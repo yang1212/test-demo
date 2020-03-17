@@ -21,7 +21,7 @@ export default {
       }, {
         name: '收藏',
         routeName: 'tab3',
-      },]
+      }]
     }
   },
   methods: {
