@@ -1,9 +1,8 @@
 <template>
   <div class="page1-box">
     <div class="video-list">
-      <div class="list-title">
-        {{$route.params.userId}}
-        <!-- {{list}} -->
+      <div class="list-title">name1
+        {{list}}
       </div>
     </div>
   </div>
