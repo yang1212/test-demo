@@ -1,12 +1,11 @@
-import Vuex from 'vuex'
 import Vue from 'vue'
-import flightModule from './flightModule'
+import Vuex from 'vuex'
+import homeData from './homeData'
 
 Vue.use(Vuex)
-
 const store = new Vuex.Store({
   modules: {
-    flightModule: flightModule
+    homeData
   }
 })
 

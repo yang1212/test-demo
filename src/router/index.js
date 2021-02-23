@@ -1,9 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import Home from '@/pages/home/homePage'
-// import Detail from '@/pages/detail/detailPage'
-// import Content from '@/pages/content/contentPage'
-// import Index from '@/pages/index'
 
 Vue.use(Router)
 
@@ -11,28 +7,34 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/from',
+      path: '/',
       name: 'index',
-      // component: Index,
       component: () => import(/* webpackChunkName: 'index' */ '../pages/index'),
       children: [
         {
-          path: 'page1',
-          name: 'tab1',
-          // component: Home
-          component: () => import(/* webpackChunkName: 'index/tab1' */ '../pages/home/HomePage')
+          path: '/homePage1',
+          name: 'homePage1',
+          component: () => import(/* webpackChunkName: 'tab1' */ '../pages/homePage/index')
         },
         {
-          path: 'page2',
-          name: 'tab2',
-          // component: Detail
-          component: () => import(/* webpackChunkName: 'index/tab2' */ '../pages/detail/detailPage')
+          path: '/homePage2',
+          name: 'homePage2',
+          component: () => import(/* webpackChunkName: 'tab1' */ '../pages/homePage/index')
         },
         {
-          path: 'page3',
-          name: 'tab3',
-          // component: Content
-          component: () => import(/* webpackChunkName: 'index/tab3' */ '../pages/content/contentPage')
+          path: '/pushContent/:id',
+          name: 'pushContent',
+          component: () => import(/* webpackChunkName: 'tab1' */ '../pages/pushContent/index')
+        },
+        {
+          path: '/addDoc/:id',
+          name: 'addDoc',
+          component: () => import(/* webpackChunkName: 'tab1' */ '../pages/pushContent/addDoc')
+        },
+        {
+          path: '/editDoc/:id',
+          name: 'editDoc',
+          component: () => import(/* webpackChunkName: 'tab1' */ '../pages/pushContent/editDoc')
         }
       ]
     }

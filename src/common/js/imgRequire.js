@@ -1,14 +1,14 @@
 import axios from 'axios'
-
 let config = {
-  baseURL: '/',
+  baseURL: '/api',
   transformRequest: [
     function (data) {
-      let ret = '';
-      for (let it in data) {
-        ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-      }
-      return ret
+      // let ret = ''
+      // for (let it in data) {
+      //   ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+      // }
+      // return ret
+      return data
     }
   ],
   transformResponse: [
@@ -17,13 +17,13 @@ let config = {
     }
   ],
   headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+    // 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
   },
   timeout: 10000,
   responseType: 'json'
 }
 
-export function get(url) {
+export function get (url) {
   return new Promise((resolve, reject) => {
     axios.get(url, config).then((res) => {
       resolve(res.data)
@@ -33,7 +33,7 @@ export function get(url) {
   })
 }
 
-export function post(url, params) {
+export function post (url, params) {
   return new Promise((resolve, reject) => {
     axios.post(url, params, config).then((res) => {
       resolve(res.data)

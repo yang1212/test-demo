@@ -1,21 +1,31 @@
 <template>
-  <div>
-    <header-tab/>
-    <router-view/>
+  <div class="container">
+    <nav-bar></nav-bar>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import headerTab from '@/components/header'
+import navBar from '@components/navBar/navBar'
 
 export default {
-  name: 'index',
+  name: 'HelloWorld',
   components: {
-    headerTab
+    navBar
+  },
+  data () {
+    return {
+      msg: ''
+    }
+  },
+  methods: {
   }
 }
 </script>
 
-<style>
-
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="scss">
+.container {
+  height: 100%;
+}
 </style>

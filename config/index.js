@@ -5,15 +5,24 @@
 const path = require('path')
 
 module.exports = {
+  apiHost:process.env.APIHOST || 'localhost',
+  apiPort:process.env.APIPORT || '3030',
+  dbHost:"localhost",
+  dbPort:"27017",
   dev: {
-
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
-
+    proxyTable: {
+      '/api': {
+        target: 'http://localhost:3030',
+        pathRewrite: {
+          '/api': ''
+        }
+      }  
+    },
     // Various Dev Server settings
-    host: 'localhost', // can be overwritten by process.env.HOST
+    host: '172.20.3.98', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
