@@ -54,3 +54,14 @@ export function delData (params) {
     })
   })
 }
+
+export function ziZeng (params) {
+  let url = '/calculate/ziZeng'
+  return new Promise((resolve, reject) => {
+    post(url, params).then((res) => {
+      resolve(res)
+    }).catch((data) => {
+      reject(data)
+    })
+  })
+}

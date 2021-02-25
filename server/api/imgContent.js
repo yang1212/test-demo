@@ -1,8 +1,9 @@
 import Express from 'express'
 import { responseClient } from '../utils'
-const router = Express.Router()
+const router = Express.Router()   
 const path = require('path')
 const fs = require('fs')
+// connect-multiparty中间件，可用于获取文件上传时各种参数，比如文件大小、格式等
 const multipart = require('connect-multiparty')
 
 const multipartMiddleware = multipart()

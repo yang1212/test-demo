@@ -23,6 +23,20 @@ router.post('/addLifeData', function (req, res) {
   })
 })
 
+// 新增数据
+router.post('/ziZeng', function (req, res) {
+  const { _id, sequence_value } = req.body 
+  const tempData = new Counter({
+    _id,
+    sequence_value
+  }) 
+  tempData.save().then(data => {
+    responseClient(res, 200, 200, '请求成功', data)
+  }).catch(err => {
+    responseClient(res)
+  })
+})
+
 // 查找数据内容
 router.post('/getLifeData', function (req, res) {
   const { _id } = req.body     
