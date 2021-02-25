@@ -31,7 +31,7 @@ import colorSyntax from '@toast-ui/editor-plugin-color-syntax'
 import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight'
 import hljs from 'highlight.js'
 import { mapGetters, mapActions } from 'vuex'
-import { getLifeData, getList, delData, ziZeng } from './server'
+import { getLifeData, getList, delData } from './server'
 
 export default {
   name: 'HelloWorld',
@@ -52,9 +52,6 @@ export default {
   created () {
     this.selectId = this.$route.params.id
     this.selectId === 'home' ? this.updatePage('home') : this.updatePage('singleList')
-    ziZeng({ _id: 'productid', sequence_value: 0 }).then(res => {
-      console.log(res)
-    })
   },
   mounted () {
     this.initData(this.selectId)
