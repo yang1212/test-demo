@@ -19,3 +19,10 @@ npm run build --report
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+
+项目备注：
+
+需提前创建好runoob数据库
+
+利用postman或者接口实现自增参数写入： Counters集合
