@@ -1,11 +1,10 @@
 <template>
   <div class="nav-box">
-    <div class="home-tag" @click="chooseLogo"><el-avatar icon="el-icon-user-solid"></el-avatar></div>
+    <div class="home-tag" @click="chooseLogo"><el-avatar size="small" src="https://d36jcksde1wxzq.cloudfront.net/saas-mega/whiteFingerprint.png"></el-avatar></div>
     <el-menu :default-active="this.$route.path" router mode="horizontal" active-text-color="#178fff" class="nav-list">
       <el-menu-item v-for="(item,i) in navList" :key="i" :index="item.name">
         {{ item.navItem }}
       </el-menu-item>
-      <el-menu-item @click="handleCreate">create</el-menu-item>
     </el-menu>
   </div>
 </template>
@@ -19,7 +18,9 @@ export default {
     return {
       navList: [
         { navItem: 'nav1', name: '/homePage1' },
-        { navItem: 'nav2', name: '/homePage2' }
+        { navItem: 'nav2', name: '/homePage2' },
+        { navItem: 'nav3', name: '/homePage1' },
+        { navItem: 'nav4', name: '/homePage2' }
       ]
     }
   },
@@ -32,12 +33,6 @@ export default {
       this.$router.push({
         path: '/pushContent/home'
       })
-    },
-    handleCreate () {
-      const parentId = this.$route.params.id
-      this.$router.push({
-        path: '/addDoc/' + parentId
-      })
     }
   }
 }
@@ -48,14 +43,16 @@ export default {
 .nav-box {
   border-bottom: 1px solid #e5e5e5;
   position: relative;
+  display: flex;
+  justify-content: flex-end;
   .home-tag {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 18px;
+    left: 20px;
     z-index: 2;
   }
   .nav-list {
-    margin-left: 80px;
+    margin-right: 20px;
     border-bottom: none;
   }
 }

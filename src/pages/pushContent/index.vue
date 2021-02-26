@@ -1,12 +1,25 @@
 <template>
   <div class="common-box">
     <div class="tree-list-box">
+      <div class="create-box">
+        <span>Article</span>
+        <el-button size="small" class="create-btn" @click="handleCreate">Create</el-button>
+      </div>
+      <el-input
+        class="search-box"
+        prefix-icon="el-icon-search"
+        placeholder="Find a article"
+        v-model="filterText"
+        size="small"
+        clearable>
+      </el-input>
       <el-tree
         ref="tree"
         node-key="_id"
         :data="treeData"
         :props="defaultProps"
         :load="loadNode"
+        :filter-node-method="filterNode"
         @node-click="handleNodeClick"
         lazy
       ></el-tree>
@@ -46,7 +59,8 @@ export default {
       content: '',
       selectId: '',
       viewer: null,
-      title: ''
+      title: '',
+      filterText: ''
     }
   },
   created () {
@@ -61,13 +75,18 @@ export default {
       'pageType'
     ])
   },
+  watch: {
+    filterText (val) {
+      this.$refs.tree.filter(val)
+    }
+  },
   methods: {
     ...mapActions([
       'updatePage'
     ]),
     initData (id) {
       this.getListData()
-      this.getData(id)
+      if (id !== 'home') { this.getContent(id) }
     },
     getListData () {
       getList({ parentId: -1 }).then(res => {
@@ -75,6 +94,16 @@ export default {
           this.treeData = res.data
         }
       })
+    },
+    handleCreate () {
+      const parentId = this.$route.params.id
+      this.$router.push({
+        path: '/addDoc/' + parentId
+      })
+    },
+    filterNode (value, data) {
+      if (!value) return true
+      return data.title.indexOf(value) !== -1
     },
     loadNode (node, resolve) {
       if (node.level > 0) {
@@ -92,14 +121,14 @@ export default {
         { name: 'pushContent', params: { 'id': data._id } }
       )
       this.selectId = data._id
-      this.getData(this.selectId)
+      this.getContent(this.selectId)
     },
     updateDoc () {
       this.$router.push({
         path: '/editDoc/' + this.selectId
       })
     },
-    getData (id) {
+    getContent (id) {
       this.renderView()
       getLifeData({_id: id}).then(res => {
         res = res.data
@@ -139,10 +168,30 @@ export default {
   height: 100%;
   display: flex;
   .tree-list-box {
-    width: 200px;
+    width: 250px;
     border-right: 1px solid #e5e5e5;
     color: #3572b0;
     height: 100%;
+    padding: 0 15px;
+    .create-box {
+      margin: 20px 0 8px 0;
+      height: 30px;
+      line-height: 30px;
+      display: flex;
+      justify-content: space-between;
+      .create-btn {
+        font-size: 12px;
+        text-align: center;
+        text-align: center;
+        border-radius: 8px;
+        height: 28px;
+        width: 55px;
+        padding: 0;
+      }
+    }
+    .search-box {
+      margin-bottom: 10px;
+    }
   }
   .flex_btns{
     position: fixed;
