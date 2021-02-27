@@ -1,4 +1,5 @@
 import { post } from '../../common/js/require'
+import { postFile } from '../../common/js/imgRequire'
 
 export function getLifeData (params) {
   let url = '/calculate/getLifeData'
@@ -48,6 +49,17 @@ export function delData (params) {
   let url = '/calculate/delData'
   return new Promise((resolve, reject) => {
     post(url, params).then((res) => {
+      resolve(res)
+    }).catch((data) => {
+      reject(data)
+    })
+  })
+}
+
+export function sumbitImgData (params) {
+  let url = '/imgData/fileData'
+  return new Promise((resolve, reject) => {
+    postFile(url, params).then((res) => {
       resolve(res)
     }).catch((data) => {
       reject(data)

@@ -33,7 +33,7 @@ export function get (url) {
   })
 }
 
-export function post (url, params) {
+export function postFile (url, params) {
   return new Promise((resolve, reject) => {
     axios.post(url, params, config).then((res) => {
       resolve(res.data)

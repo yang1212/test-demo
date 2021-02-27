@@ -1,5 +1,6 @@
 import Express from 'express'
 import { responseClient } from '../utils'
+import Images from '../../models/img'
 const router = Express.Router()
 const path = require('path')
 const fs = require('fs')
@@ -8,15 +9,23 @@ const multipart = require('connect-multiparty')
 const multipartMiddleware = multipart()
 
 router.post('/fileData', multipartMiddleware, (req, res) => {
-  const { name, uid } = req.body
+  const { name, uid, dateTime } = req.body
   const file = req.files
   const reader = fs.createReadStream(file.file.path)
   const stream = fs.createWriteStream(path.join('static', `${uid}${name}`))
   reader.pipe(stream)
   stream.on('finish', function() {
-    const data = {}
-    data.path = path.join(path.resolve(__dirname, '../../static'), name)
-    responseClient(res, 200, 200, '请求成功', data)
+    const tempData = new Images({
+      path: `${uid}${name}`,
+      id: uid,
+      name: name,
+      dateTime: dateTime
+    })
+    tempData.save().then(data => {
+      responseClient(res,200,200,'保存成功',data)
+    }).cancel(err=>{
+      responseClient(res)
+    })
   })
 })
 

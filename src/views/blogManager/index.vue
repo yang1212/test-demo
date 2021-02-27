@@ -30,9 +30,11 @@
         <el-button icon="el-icon-delete" size="small" @click="handleDelete">删除</el-button>
       </div>
       <div class="content-container">
-        <div v-show="pageType === 'home'">删除元素后跳转此默认首页</div>
-        <h3>{{title}}</h3>
-        <div id="viewer" v-show="pageType !== 'home'"></div>
+        <div v-show="pageType === 'home'">默认首页</div>
+        <div v-show="pageType !== 'home'">
+          <h3>{{title}}</h3>
+          <div id="viewer"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -118,7 +120,7 @@ export default {
     handleNodeClick (data) {
       if (this.pageType === 'home') { this.updatePage('singleList') }
       this.$router.push(
-        { name: 'pushContent', params: { 'id': data._id } }
+        { name: 'blogManager', params: { 'id': data._id } }
       )
       this.selectId = data._id
       this.getContent(this.selectId)
@@ -151,7 +153,7 @@ export default {
       delData({id: this.selectId}).then(res => {
         if (res.resultCode === 200) {
           this.$router.push({
-            path: '/pushContent/home'
+            path: '/blogManager/home'
           })
           this.updatePage('home')
           this.getListData()

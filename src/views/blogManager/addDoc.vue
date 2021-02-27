@@ -42,7 +42,7 @@ export default {
         addLifeData(this.createParam).then(res => {
           if (res.resultCode === 200) {
             this.$router.push({
-              path: '/pushContent/' + res.data._id
+              path: '/blogManager/' + res.data._id
             })
           }
         })

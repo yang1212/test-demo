@@ -9,32 +9,42 @@ export default new Router({
     {
       path: '/',
       name: 'index',
-      component: () => import(/* webpackChunkName: 'index' */ '../pages/index'),
+      component: () => import(/* webpackChunkName: 'index' */ '../views/index'),
       children: [
         {
-          path: '/homePage1',
-          name: 'homePage1',
-          component: () => import(/* webpackChunkName: 'tab1' */ '../pages/homePage/index')
-        },
-        {
-          path: '/homePage2',
-          name: 'homePage2',
-          component: () => import(/* webpackChunkName: 'tab1' */ '../pages/homePage/index')
-        },
-        {
-          path: '/pushContent/:id',
-          name: 'pushContent',
-          component: () => import(/* webpackChunkName: 'tab1' */ '../pages/pushContent/index')
+          path: '/blogManager/:id',
+          name: 'blogManager',
+          component: () => import(/* webpackChunkName: 'tab1' */ '../views/blogManager/index')
         },
         {
           path: '/addDoc/:id',
           name: 'addDoc',
-          component: () => import(/* webpackChunkName: 'tab1' */ '../pages/pushContent/addDoc')
+          component: () => import(/* webpackChunkName: 'tab1' */ '../views/blogManager/addDoc')
         },
         {
           path: '/editDoc/:id',
           name: 'editDoc',
-          component: () => import(/* webpackChunkName: 'tab1' */ '../pages/pushContent/editDoc')
+          component: () => import(/* webpackChunkName: 'tab1' */ '../views/blogManager/editDoc')
+        },
+        {
+          path: '/imageManager1',
+          name: 'imageManager',
+          component: () => import(/* webpackChunkName: 'tab1' */ '../views/imageManager/index')
+        },
+        {
+          path: '/imageManager2',
+          name: 'imageManager2',
+          component: () => import(/* webpackChunkName: 'tab1' */ '../views/imageManager/index')
+        },
+        {
+          path: '/imageManager3',
+          name: 'imageManager3',
+          component: () => import(/* webpackChunkName: 'tab1' */ '../views/imageManager/index')
+        },
+        {
+          path: '/imageManager4',
+          name: 'imageManager4',
+          component: () => import(/* webpackChunkName: 'tab1' */ '../views/imageManager/index')
         }
       ]
     }

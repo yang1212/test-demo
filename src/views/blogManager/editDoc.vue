@@ -48,7 +48,7 @@ export default {
       }).then(res => {
         if (res.resultCode === 200) {
           this.$router.push({
-            path: '/pushContent/' + this.id
+            path: '/blogManager/' + this.id
           })
         }
       })

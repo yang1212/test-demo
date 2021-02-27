@@ -1,7 +1,7 @@
 <template>
   <div class="nav-box">
     <div class="home-tag" @click="chooseLogo"><el-avatar size="small" src="https://d36jcksde1wxzq.cloudfront.net/saas-mega/whiteFingerprint.png"></el-avatar></div>
-    <el-menu :default-active="this.$route.path" router mode="horizontal" active-text-color="#178fff" class="nav-list">
+    <el-menu :default-active="this.$route.path"  mode="horizontal" active-text-color="#178fff" class="nav-list" @select="handleSelect">
       <el-menu-item v-for="(item,i) in navList" :key="i" :index="item.name">
         {{ item.navItem }}
       </el-menu-item>
@@ -17,10 +17,10 @@ export default {
   data () {
     return {
       navList: [
-        { navItem: 'nav1', name: '/homePage1' },
-        { navItem: 'nav2', name: '/homePage2' },
-        { navItem: 'nav3', name: '/homePage1' },
-        { navItem: 'nav4', name: '/homePage2' }
+        { navItem: 'blog', name: '/blogManager/home' },
+        { navItem: 'nav2', name: '/imageManager2' },
+        { navItem: 'nav3', name: '/imageManager3' },
+        { navItem: 'nav4', name: '/imageManager4' }
       ]
     }
   },
@@ -29,9 +29,12 @@ export default {
       'updatePage'
     ]),
     chooseLogo () {
+      console.log(23)
+    },
+    handleSelect (key, keyPath) {
       this.updatePage('home')
       this.$router.push({
-        path: '/pushContent/home'
+        path: key
       })
     }
   }
