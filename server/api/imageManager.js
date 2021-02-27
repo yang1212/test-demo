@@ -29,4 +29,13 @@ router.post('/fileData', multipartMiddleware, (req, res) => {
   })
 })
 
+// 查找数据内容
+router.post('/imageList', function (req, res) {
+  Images.find().then(data => {
+    responseClient(res, 200, 200, '请求成功', data)
+  }).catch(err => {
+    responseClient(res)
+  })
+})
+
 module.exports = router
