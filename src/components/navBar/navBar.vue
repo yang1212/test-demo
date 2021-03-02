@@ -19,6 +19,8 @@ export default {
       navList: [
         // { navItem: 'blog', name: '/blogManager/home' },
         // { navItem: 'image', name: '/imageManager2' },
+        { navItem: 'nav1', name: '/imageManager3' },
+        { navItem: 'nav2', name: '/imageManager4' },
         { navItem: 'nav3', name: '/imageManager3' },
         { navItem: 'nav4', name: '/imageManager4' }
       ]
