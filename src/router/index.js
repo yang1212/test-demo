@@ -9,7 +9,7 @@ export default new Router({
     {
       path: '',
       name: 'index',
-      redirect: 'imageManager3',
+      redirect: 'blogManager/home',
       component: () => import(/* webpackChunkName: 'index' */ '../views/index'),
       children: [
         {
@@ -40,12 +40,12 @@ export default new Router({
         {
           path: '/imageManager3',
           name: 'imageManager3',
-          component: () => import(/* webpackChunkName: 'tab1' */ '../views/imageManager3/index')
+          component: () => import(/* webpackChunkName: 'tab1' */ '../views/imageManager/index')
         },
         {
           path: '/imageManager4',
           name: 'imageManager4',
-          component: () => import(/* webpackChunkName: 'tab1' */ '../views/imageManager4/index')
+          component: () => import(/* webpackChunkName: 'tab1' */ '../views/imageManager/index')
         }
       ]
     }

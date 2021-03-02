@@ -17,8 +17,8 @@ export default {
   data () {
     return {
       navList: [
-        // { navItem: 'blog', name: '/blogManager/home' },
-        // { navItem: 'image', name: '/imageManager2' },
+        { navItem: 'blog', name: '/blogManager/home' },
+        { navItem: 'image', name: '/imageManager2' },
         { navItem: 'nav3', name: '/imageManager3' },
         { navItem: 'nav4', name: '/imageManager4' }
       ]
