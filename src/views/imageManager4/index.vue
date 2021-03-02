@@ -1,11 +1,25 @@
 <template>
   <div class="common-box">
-    <el-steps :active="1">
-      <el-step title="步骤 1" icon="el-icon-edit"></el-step>
-      <el-step title="步骤 2" icon="el-icon-upload"></el-step>
-      <el-step title="步骤 3" icon="el-icon-picture"></el-step>
-      <el-step title="步骤 4" icon="el-icon-upload"></el-step>
-    </el-steps>
+    <div class="block">
+      <span class="demonstration">默认</span>
+      <el-slider v-model="value1"></el-slider>
+    </div>
+    <div class="block">
+      <span class="demonstration">自定义初始值</span>
+      <el-slider v-model="value2"></el-slider>
+    </div>
+    <div class="block">
+      <span class="demonstration">隐藏 Tooltip</span>
+      <el-slider v-model="value3" :show-tooltip="false"></el-slider>
+    </div>
+    <div class="block">
+      <span class="demonstration">格式化 Tooltip</span>
+      <el-slider v-model="value4" :format-tooltip="formatTooltip"></el-slider>
+    </div>
+    <div class="block">
+      <span class="demonstration">禁用</span>
+      <el-slider v-model="value5" disabled></el-slider>
+    </div>
   </div>
 </template>
 

@@ -1,32 +1,17 @@
 <template>
   <div class="common-box">
-    <div class="block" style="margin-top:30px">
-      <el-timeline>
-        <el-timeline-item timestamp="2018/4/12" placement="top">
-          <el-card>
-            <h4>更新 Github 模板</h4>
-            <p>xx 提交于 2018/4/12 20:46</p>
-          </el-card>
-        </el-timeline-item>
-        <el-timeline-item timestamp="2018/4/3" placement="top">
-          <el-card>
-            <h4>更新 Github 模板</h4>
-            <p>王小虎 提交于 2018/4/3 20:46</p>
-          </el-card>
-        </el-timeline-item>
-        <el-timeline-item timestamp="2018/4/2" placement="top">
-          <el-card>
-            <h4>更新 Github 模板</h4>
-            <p>王小虎 提交于 2018/4/2 20:46</p>
-          </el-card>
-        </el-timeline-item>
-        <el-timeline-item timestamp="2018/4/2" placement="top">
-          <el-card>
-            <h4>更新 Github 模板</h4>
-            <p>王小虎 提交于 2018/4/2 20:46</p>
-          </el-card>
-        </el-timeline-item>
-      </el-timeline>
+    <div class="sort-panel">
+      <el-tag v-for="(item, index) in tagList" :key="index" :type="item.type" class="tag-btn">{{item.name}}</el-tag>
+    </div>
+    <el-divider content-position="right">Tiboo</el-divider>
+    <div class="image-panel">
+      <div v-for="(item, index) in waterfallList"
+           class="item-box"
+           :key="index"
+           :style="{top:item.top +'px',left:item.left+'px',width:imgWidth+'px',height:item.height}">
+        <img :src="item.url"/>
+        <div class="footer-remark">{{item.date}}</div>
+      </div>
     </div>
   </div>
 </template>
