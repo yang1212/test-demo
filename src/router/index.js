@@ -7,8 +7,9 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/',
+      path: '',
       name: 'index',
+      redirect: 'blogManager/home',
       component: () => import(/* webpackChunkName: 'index' */ '../views/index'),
       children: [
         {
