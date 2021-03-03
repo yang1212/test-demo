@@ -49,27 +49,30 @@ export default {
       ],
       waterfallList: [],
       imgData: [],
-      imgCols: 5,
+      imgCols: 8,
       imgRight: 10,
       imgBottom: 10,
-      imgFooterHeight: 40, // 用于底部文案的高度
+      imgFooterHeight: 50, // 用于底部文案的高度
       screenWidth: document.body.clientWidth,
       deviationHeight: []
     }
   },
   created () {
-    getImageData().then(res => {
-      if (res.resultCode === 200) {
-        res.data.forEach((item) => {
-          this.imgData.push({date: item.dateTime, name: item.name, url: `../../../static/${item.path}`})
-        })
-        this.calculateImgWidth()
-      }
-    })
+    this.init()
   },
   mounted () {
   },
   methods: {
+    init () {
+      getImageData().then(res => {
+        if (res.resultCode === 200) {
+          res.data.forEach((item) => {
+            this.imgData.push({date: item.dateTime, name: item.name, url: `../../../static/${item.path}`})
+          })
+          this.calculateImgWidth()
+        }
+      })
+    },
     beforeUpload (file) {
       let fd = new FormData()
       fd.append('file', file)
@@ -78,10 +81,11 @@ export default {
       fd.append('dateTime', new Date())
       sumbitImgData(fd).then(res => {
         console.log(1, res)
+        this.init()
       })
     },
     calculateImgWidth () {
-      this.imgWidth = (this.screenWidth - this.imgRight * this.imgCols) / this.imgCols
+      this.imgWidth = (this.screenWidth - this.imgRight * this.imgCols - 120) / this.imgCols
       this.deviationHeight = new Array(this.imgCols)
       for (let i = 0; i < this.deviationHeight.length; i++) {
         this.deviationHeight[i] = 0
@@ -110,7 +114,6 @@ export default {
       let minIndex = this.filterMin()
       imgData.top = this.deviationHeight[minIndex]
       imgData.left = minIndex * (this.imgRight + this.imgWidth)
-      console.log(88, imgData.top, imgData.left)
       this.deviationHeight[minIndex] += (imgData.height + this.imgBottom + this.imgFooterHeight)
     },
     // 找到最短的列并返回下标
@@ -138,8 +141,8 @@ export default {
     top: 20px;
   }
   .image-panel {
-    margin: 0 10px;
     position: relative;
+    margin-left: 40px;
     .item-box {
       position: absolute;
       background: #eee;

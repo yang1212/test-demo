@@ -1,8 +1,10 @@
 <template>
   <div class="container">
     <nav-bar></nav-bar>
-    <router-view></router-view>
-    <div style="position:fixed;bottom:0px;right:300px">湘ICP备2021002848号-1</div>
+    <div class="content">
+      <router-view></router-view>
+      <div class="footer">湘ICP备2021002848号-1</div>
+    </div>
   </div>
 </template>
 
@@ -28,5 +30,25 @@ export default {
 <style scoped lang="scss">
 .container {
   height: 100%;
+  width: 100%;
+  .header {
+    position: fixed;
+    height: 60px;
+    z-index: 2;
+  }
+  .content {
+    padding-top: 60px;
+    width: 100%;
+    min-height: 100%;
+    position: relative;
+    .footer {
+      position: absolute;
+      height: 50px;
+      bottom: 50px;
+      right: 50px;
+      height: 0;
+      background: gray;
+    }
+  }
 }
 </style>

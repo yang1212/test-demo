@@ -21,14 +21,13 @@ export default {
   },
   data () {
     return {
-      editor: null,
-      pathTest: ''
+      editor: null
     }
   },
   computed: {
     editorOptions () {
       const options = Object.assign({}, defaultOptions)
-      options.hooks.addImageBlobHook = this.handleUpload
+      // options.hooks.addImageBlobHook = this.handleUpload
       return options
     }
   },
@@ -48,18 +47,24 @@ export default {
         previewStyle: 'vertical',
         ...this.editorOptions
       })
+      // 删除默认监听事件
+      this.editor.eventManager.removeEventHandler('addImageBlobHook')
+      // 添加自定义监听事件
+      this.editor.eventManager.listen('addImageBlobHook', (blob, callback) => {
+        // 此处填写自己的上传逻辑，url为上传后的图片地址
+        this.handleUpload(blob, url => {
+          callback(url)
+        })
+      })
     },
     handleUpload (file) {
-      // if (!this.beforeUpload(file)) return
       let fd = new FormData()
       fd.append('file', file)
       fd.append('name', file.name)
       fd.append('uid', file.lastModified)
-      console.log(1, file, fd)
       return sumbitImgData(fd).then(res => {
-        console.log(2, res)
-        this.pathTest = res.data.path
-        // if (res && res.data) callback(encodeURI(res.data), 'image')
+        const editor = this.editor.getCodeMirror()
+        editor.replaceSelection(`![img](../../../../static/${res.data.path})`)
       })
     },
     getMarkdown () {
