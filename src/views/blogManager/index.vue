@@ -1,42 +1,48 @@
 <template>
   <div class="common-box">
-    <div class="tree-list-box">
-      <div class="create-box">
-        <span>Article</span>
-        <el-button size="small" class="create-btn" @click="handleCreate">Create</el-button>
-      </div>
-      <el-input
-        class="search-box"
-        prefix-icon="el-icon-search"
-        placeholder="Find a article"
-        v-model="filterText"
-        size="small"
-        clearable>
-      </el-input>
-      <el-tree
-        ref="tree"
-        node-key="_id"
-        :data="treeData"
-        :props="defaultProps"
-        :load="loadNode"
-        :filter-node-method="filterNode"
-        @node-click="handleNodeClick"
-        lazy
-      ></el-tree>
-    </div>
-    <div>
-      <div class="flex_btns" v-if="treeData.length > 0 && selectId !== 'home'">
-        <el-button icon="el-icon-edit" @click="updateDoc" size="small">编辑</el-button>
-        <el-button icon="el-icon-delete" size="small" @click="handleDelete">删除</el-button>
-      </div>
-      <div class="content-container">
-        <div v-show="pageType === 'home'">默认首页</div>
-        <div v-show="pageType !== 'home'">
-          <h3>{{title}}</h3>
-          <div id="viewer"></div>
+    <el-row>
+      <el-col :span="5">
+        <div class="tree-list-box">
+          <div class="create-box">
+            <span>Article</span>
+            <el-button size="small" class="create-btn" @click="handleCreate">Create</el-button>
+          </div>
+          <el-input
+            class="search-box"
+            prefix-icon="el-icon-search"
+            placeholder="Find a article"
+            v-model="filterText"
+            size="small"
+            clearable>
+          </el-input>
+          <el-tree
+            ref="tree"
+            node-key="_id"
+            :data="treeData"
+            :props="defaultProps"
+            :load="loadNode"
+            :filter-node-method="filterNode"
+            @node-click="handleNodeClick"
+            lazy
+          ></el-tree>
         </div>
-      </div>
-    </div>
+      </el-col>
+      <el-col :span="19">
+        <div class="content-box">
+          <div class="flex_btns" v-if="treeData.length > 0 && selectId !== 'home'">
+            <el-button icon="el-icon-edit" @click="updateDoc" size="small">编辑</el-button>
+            <el-button icon="el-icon-delete" size="small" @click="handleDelete">删除</el-button>
+          </div>
+          <div class="content-container">
+            <div v-show="pageType === 'home'">默认首页</div>
+            <div v-show="pageType !== 'home'">
+              <h3>{{title}}</h3>
+              <div id="viewer"></div>
+            </div>
+          </div>
+        </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -171,7 +177,6 @@ export default {
   display: flex;
   .tree-list-box {
     width: 250px;
-    border-right: 1px solid #e5e5e5;
     color: #3572b0;
     height: 100%;
     padding: 0 15px;
@@ -195,22 +200,27 @@ export default {
       margin-bottom: 10px;
     }
   }
-  .flex_btns{
-    position: fixed;
-    right: 20px;
-    top: 80px;
-    background-color: #ffffff;
-    /deep/ .el-button{
-      border: none;
-      color: #178fff;
+  .content-box {
+    border-left: 1px solid #e5e5e5;
+    height: 100%;
+    overflow: auto;
+    .flex_btns{
+      position: fixed;
+      right: 20px;
+      top: 80px;
+      background-color: #ffffff;
+      /deep/ .el-button{
+        border: none;
+        color: #178fff;
+      }
+      /deep/ .el-dropdown{
+        color: #178fff;
+      }
     }
-    /deep/ .el-dropdown{
-      color: #178fff;
+    .content-container {
+      padding: 10px 20px;
+      margin-right: 200px;
     }
-  }
-  .content-container {
-    padding: 10px 20px;
-    margin-right: 200px;
   }
 }
 </style>
