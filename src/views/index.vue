@@ -3,7 +3,13 @@
     <nav-bar></nav-bar>
     <div class="content">
       <router-view></router-view>
-      <div class="footer">湘ICP备2021002848号-1</div>
+      <div class="footer">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43062402000140" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img src="../../static/beian.png"/>
+          <span style="color:#939393;">湘公网安备 43062402000140号</span>
+        </a>
+        <span>湘ICP备2021002848号-1</span>
+      </div>
     </div>
   </div>
 </template>
@@ -39,15 +45,17 @@ export default {
   .content {
     padding-top: 60px;
     width: 100%;
-    min-height: 100%;
     position: relative;
+    min-height: 100%;
+    box-sizing: border-box;
     .footer {
+      width: 100%;
+      text-align: center;
       position: absolute;
       height: 50px;
-      bottom: 50px;
-      right: 50px;
-      height: 0;
-      background: gray;
+      line-height: 50px;
+      bottom: 0px;
+      background: #eee;
     }
   }
 }
