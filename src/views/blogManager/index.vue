@@ -1,7 +1,7 @@
 <template>
   <div class="common-box">
     <el-row>
-      <el-col :span="5">
+      <el-col :span="4">
         <div class="tree-list-box">
           <div class="create-box">
             <span>Article</span>
@@ -27,7 +27,7 @@
           ></el-tree>
         </div>
       </el-col>
-      <el-col :span="19">
+      <el-col :span="20">
         <div class="content-box">
           <div class="flex_btns" v-if="treeData.length > 0 && selectId !== 'home'">
             <el-button icon="el-icon-edit" @click="updateDoc" size="small">编辑</el-button>
@@ -174,9 +174,7 @@ export default {
 <style scoped lang="scss">
 .common-box {
   height: 100%;
-  display: flex;
   .tree-list-box {
-    width: 250px;
     color: #3572b0;
     height: 100%;
     padding: 0 15px;

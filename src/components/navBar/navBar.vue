@@ -45,9 +45,14 @@ export default {
 <style scoped lang="scss">
 .nav-box {
   border-bottom: 1px solid #e5e5e5;
-  position: relative;
-  display: flex;
-  justify-content: flex-end;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  z-index: 999;
   .home-tag {
     position: absolute;
     top: 18px;
@@ -55,6 +60,7 @@ export default {
     z-index: 2;
   }
   .nav-list {
+    float: right;
     margin-right: 20px;
     border-bottom: none;
   }
