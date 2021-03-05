@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-box">
     <nav-bar></nav-bar>
     <div class="content">
       <router-view></router-view>
@@ -8,7 +8,7 @@
           <img src="../../static/beian.png"/>
           <span style="color:#939393;">湘公网安备 43062402000140号</span>
         </a>
-        <span>湘ICP备2021002848号-1</span>
+        <span style="display: block;color:#939393">湘ICP备2021002848号-1</span>
       </div>
     </div>
   </div>
@@ -34,7 +34,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.container {
+.container-box {
   height: 100%;
   width: 100%;
   .header {
@@ -52,10 +52,13 @@ export default {
       width: 100%;
       text-align: center;
       position: absolute;
-      height: 50px;
-      line-height: 50px;
+      height: 45px;
       bottom: 0px;
       background: #eee;
+      padding: 5px 0;
+      p {
+        margin: 0;
+      }
     }
   }
 }

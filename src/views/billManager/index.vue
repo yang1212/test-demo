@@ -1,27 +1,15 @@
 <template>
-  <div class="container">
+  <div class="bill-box">
     <div class="filter-box">
       <el-form :inline="true" :model="formData">
         <el-form-item>
-          <el-input v-model="formData.objName" placeholder="objName"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-input v-model="formData.objName" placeholder="objType"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-date-picker
-            v-model="formData.objDate"
-            type="daterange"
-            align="right"
-            unlink-panels
-            range-separator="至"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
-            :picker-options="pickerOptions">
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="search" size="small">查询</el-button>
+          <el-select v-model="formData.objType" placeholder="objType">
+            <el-option v-for="(item, index) in obyTypeEnum"
+                       :key="index"
+                       :label="item.label"
+                       :value="item.code">
+            </el-option>
+          </el-select>
         </el-form-item>
       </el-form>
     </div>
@@ -62,7 +50,7 @@
 
 <script>
 import addNew from './component/addNew'
-import { billTypeData } from './server'
+import { getTypeData } from './server'
 
 export default {
   name: 'billManager',
@@ -99,23 +87,19 @@ export default {
         }]
       },
       formData: {
-        objName: '',
         objType: '',
         objDate: ''
       },
       showAddPanel: false,
-      dataType: []
+      obyTypeEnum: []
     }
   },
   created () {
-    billTypeData().then(res => {
-      console.log(1, res)
+    getTypeData().then(res => {
+      this.obyTypeEnum = res.data
     })
   },
   methods: {
-    search () {
-      console.log(1)
-    },
     addBtn () {
       console.log(23)
       this.showAddPanel = true
@@ -128,12 +112,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.filter-box {
-  height: 200px;
-  .tag-btn {
-    margin: 10px 20px;
-  };
-  .add-btn {
+.bill-box {
+  padding-bottom: 60px;
+  box-sizing: border-box;
+  .filter-box {
+    height: 140px;
+    .tag-btn {
+      margin: 10px 20px;
+    };
+    .add-btn {
+    }
+  }
+  .detail-box {
+    padding: 0 20px;
   }
 }
 </style>
