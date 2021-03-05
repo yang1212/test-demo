@@ -105,7 +105,6 @@ export default {
           imgData.name = item.name
           this.waterfallList.push(imgData)
           this.rankImg(imgData)
-          console.log(55, this.waterfallList)
         }
       })
     },

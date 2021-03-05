@@ -28,14 +28,14 @@ export default new Router({
           component: () => import(/* webpackChunkName: 'tab1' */ '../views/blogManager/editDoc')
         },
         {
-          path: '/imageManager1',
+          path: '/imageManager',
           name: 'imageManager',
           component: () => import(/* webpackChunkName: 'tab1' */ '../views/imageManager/index')
         },
         {
-          path: '/imageManager2',
-          name: 'imageManager2',
-          component: () => import(/* webpackChunkName: 'tab1' */ '../views/imageManager/index')
+          path: '/billManager',
+          name: 'billManager',
+          component: () => import(/* webpackChunkName: 'tab1' */ '../views/billManager/index')
         },
         {
           path: '/imageManager3',

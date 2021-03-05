@@ -18,8 +18,8 @@ export default {
     return {
       navList: [
         { navItem: 'blog', name: '/blogManager/home' },
-        { navItem: 'image', name: '/imageManager2' },
-        { navItem: 'nav3', name: '/imageManager3' },
+        { navItem: 'image', name: '/imageManager' },
+        { navItem: 'bill', name: '/billManager' },
         { navItem: 'nav4', name: '/imageManager4' }
       ]
     }
