@@ -9,45 +9,18 @@ export default new Router({
     {
       path: '',
       name: 'index',
-      redirect: 'blogManager/home',
-      component: () => import(/* webpackChunkName: 'index' */ '../views/index'),
-      children: [
-        {
-          path: '/blogManager/:id',
-          name: 'blogManager',
-          component: () => import(/* webpackChunkName: 'tab1' */ '../views/blogManager/index')
-        },
-        {
-          path: '/addDoc/:id',
-          name: 'addDoc',
-          component: () => import(/* webpackChunkName: 'tab1' */ '../views/blogManager/addDoc')
-        },
-        {
-          path: '/editDoc/:id',
-          name: 'editDoc',
-          component: () => import(/* webpackChunkName: 'tab1' */ '../views/blogManager/editDoc')
-        },
-        {
-          path: '/imageManager',
-          name: 'imageManager',
-          component: () => import(/* webpackChunkName: 'tab1' */ '../views/imageManager/index')
-        },
-        {
-          path: '/billManager',
-          name: 'billManager',
-          component: () => import(/* webpackChunkName: 'tab1' */ '../views/billManager/index')
-        },
-        {
-          path: '/imageManager3',
-          name: 'imageManager3',
-          component: () => import(/* webpackChunkName: 'tab1' */ '../views/imageManager/index')
-        },
-        {
-          path: '/imageManager4',
-          name: 'imageManager4',
-          component: () => import(/* webpackChunkName: 'tab1' */ '../views/imageManager/index')
-        }
-      ]
+      // redirect: 'blogManager/home',
+      component: () => import(/* webpackChunkName: 'index' */ '../views/index')
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: () => import(/* webpackChunkName: 'tab1' */ '../views/registerPanel/index')
+    },
+    {
+      path: '/billManager',
+      name: 'billManager',
+      component: () => import(/* webpackChunkName: 'tab1' */ '../views/billList/index')
     }
   ]
 })

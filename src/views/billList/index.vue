@@ -49,8 +49,8 @@
 </template>
 
 <script>
-import addNew from './component/addNew'
-import { getTypeData } from './server'
+import addNew from './addNew'
+import { getTypeData } from '@server/index'
 
 export default {
   name: 'billManager',
@@ -101,7 +101,6 @@ export default {
   },
   methods: {
     addBtn () {
-      console.log(23)
       this.showAddPanel = true
     },
     closePanel () {

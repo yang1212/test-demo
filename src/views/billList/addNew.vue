@@ -35,10 +35,10 @@
 </template>
 
 <script>
-import { getTypeData, createBill } from '../server'
+import { getTypeData, createBill } from '@server/index'
 
 export default {
-  name: 'billManager',
+  name: 'addNew',
   data () {
     return {
       formData: {
