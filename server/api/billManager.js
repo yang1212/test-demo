@@ -16,12 +16,20 @@ router.post('/login', function(req, res) {
 
 router.post('/register', function(req, res) {
   const { objName, password } = req.body
-  const tempData = new Register({
-    objName,
-    password
-  })
-  tempData.save().then(data => {
-    responseClient(res, 200, 200, '请求成功', data)
+  Register.find({'objName': objName}).then(data => {
+    if (data.length === 0) { // 未有相同账号注册
+      const tempData = new Register({
+        objName,
+        password
+      })
+      tempData.save().then(data => {
+        responseClient(res, 200, 200, '请求成功', data)
+      }).catch(err => {
+        responseClient(res)
+      })
+    } else {
+      responseClient(res, 200, 403, '该账号已注册', data)
+    }
   }).catch(err => {
     responseClient(res)
   })

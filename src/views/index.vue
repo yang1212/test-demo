@@ -13,19 +13,19 @@
     </div> -->
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <span>卡片名称</span>
+        <span>登录</span>
       </div>
       <div class="text item">
         <el-form :model="formData">
           <el-form-item>
-            <el-input v-model="formData.objName" placeholder="objName"></el-input>
+            <el-input v-model="formData.objName" placeholder="用户名"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-input v-model="formData.password" placeholder="password"></el-input>
+            <el-input v-model="formData.password" placeholder="密码"></el-input>
           </el-form-item>
-          <p>
-            还未注册,<span @click="onRegister">立即注册</span>
-            <span  @click="onForgot">忘记密码</span>
+          <p class="text-btn">
+            还未注册,<span @click="onRegister" class="common-text">立即注册</span>
+            <span @click="onForgot" class="common-text">忘记密码</span>
           </p>
           <el-form-item class="login-btn">
             <el-button type="primary" @click="onLogin">login</el-button>
@@ -55,7 +55,6 @@ export default {
   methods: {
     onLogin () {
       login(this.formData).then(res => {
-        console.log(2)
         this.$router.push({
           path: 'billManager'
         })
@@ -104,11 +103,27 @@ export default {
 //   }
 // }
 .container-box {
-  height: 100%;
   width: 100%;
+  padding-top: 20%;
   .box-card {
     width: 80%;
-    margin: 20% 10%;
+    margin: 0 10%;
+    .text-btn {
+      font-size: 14px;
+      span:first-child {
+        color: #409eff;
+        font-weight: bold;
+      }
+      span:last-child {
+        float: right;
+      }
+    }
+    .login-btn {
+      /deep/ .el-button {
+        width: 100%;
+        margin-top: 20px;
+      }
+    }
   }
 }
 </style>
