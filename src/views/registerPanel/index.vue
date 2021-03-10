@@ -53,7 +53,6 @@ export default {
         return
       }
       register({ objName: this.formData.objName, password: this.formData.password }).then(res => {
-        console.log(res)
         if (res.resultCode === 403) {
           this.$message.error(res.message)
         } else {

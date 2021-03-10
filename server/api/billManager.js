@@ -1,5 +1,6 @@
 import Express from 'express'
 import { responseClient } from '../utils'
+import { handleCountData } from '../index'
 import BillType from '../../models/billTypeEnum'
 import BillDetail from '../../models/billDetail'
 import Register from '../../models/register'
@@ -35,7 +36,7 @@ router.post('/register', function(req, res) {
   })
 })
 
-router.post('/initTypeList', function (req, res) {
+router.post('/initTypeList', function (req, res) { // 初始化类型，可通过postman，无需写这个接口
   const { code, label } = req.body
   const tempData = new BillType({
     code,
@@ -56,7 +57,6 @@ router.post('/typeData', function (req, res) {
   })
 })
 
-
 router.post('/createBill', function (req, res) {
   const { objName, objType, objPrice, objDate } = req.body
   const tempData = new BillDetail({
@@ -67,6 +67,36 @@ router.post('/createBill', function (req, res) {
   })
   tempData.save().then(data => {
     responseClient(res, 200, 200, '请求成功', data)
+  }).catch(err => {
+    responseClient(res)
+  })
+})
+
+router.post('/billDetailList', function (req, res) { // 根据类型过滤出对应的数据
+  const { objType } = req.body
+  if (objType) {
+    BillDetail.find({ objType: objType }).then(data => {
+      responseClient(res, 200, 200, '请求成功', data)
+    }).catch(err => {
+      responseClient(res)
+    })
+  } else {
+    BillDetail.find().then(data => {
+      responseClient(res, 200, 200, '请求成功', data)
+    }).catch(err => {
+      responseClient(res)
+    })
+  }
+})
+
+// forTimeCount
+router.post('/forTimeCount', function (req, res) { // 根据时间区间得到数据，并累加
+  const { startDate, endDate } = req.body
+  BillDetail.find({ objDate: {$lte:endDate, $gte:startDate} }).then(data => {
+    BillType.find().then(typeData => {
+      const tempData = handleCountData(data, typeData)
+      responseClient(res, 200, 200, '请求成功', tempData)
+    })
   }).catch(err => {
     responseClient(res)
   })

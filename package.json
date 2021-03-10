@@ -11,6 +11,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@antv/f2": "^3.8.3",
     "@toast-ui/editor": "^2.2.0",
     "@toast-ui/editor-plugin-chart": "^1.0.0",
     "@toast-ui/editor-plugin-code-syntax-highlight": "^1.0.0",

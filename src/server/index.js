@@ -54,3 +54,25 @@ export function createBill (param) {
     })
   })
 }
+
+export function billDetailList (param) {
+  let url = '/billType/billDetailList'
+  return new Promise((resolve, reject) => {
+    post(url, param).then((res) => {
+      resolve(res)
+    }).catch((data) => {
+      reject(data)
+    })
+  })
+}
+
+export function forTimeCount (param) {
+  let url = '/billType/forTimeCount'
+  return new Promise((resolve, reject) => {
+    post(url, param).then((res) => {
+      resolve(res)
+    }).catch((data) => {
+      reject(data)
+    })
+  })
+}

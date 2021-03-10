@@ -20,7 +20,20 @@ export default new Router({
     {
       path: '/billManager',
       name: 'billManager',
-      component: () => import(/* webpackChunkName: 'tab1' */ '../views/billList/index')
+      redirect: 'billManager/home',
+      component: () => import(/* webpackChunkName: 'tab1' */ '../views/layout/index'),
+      children: [
+        {
+          path: 'home',
+          name: 'home',
+          component: () => import(/* webpackChunkName: 'tab1' */ '../views/billList/index')
+        },
+        {
+          path: 'countData',
+          name: 'countData',
+          component: () => import(/* webpackChunkName: 'tab1' */ '../views/countData/index')
+        }
+      ]
     }
   ]
 })

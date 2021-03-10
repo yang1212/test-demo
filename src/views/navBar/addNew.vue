@@ -3,10 +3,10 @@
     <div class="filter-box">
       <el-form :model="formData" class="form-data">
         <el-form-item>
-          <el-input v-model="formData.objName" placeholder="objName"></el-input>
+          <el-input v-model="formData.objName" placeholder="名称"></el-input>
         </el-form-item>
         <el-form-item class="select-form-item">
-          <el-select v-model="formData.objType" placeholder="objType">
+          <el-select v-model="formData.objType" placeholder="类型">
             <el-option v-for="(item, index) in obyTypeEnum"
                        :key="index"
                        :label="item.label"
@@ -15,7 +15,7 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-input v-model="formData.objPrice" placeholder="objPrice"></el-input>
+          <el-input v-model="formData.objPrice" placeholder="价格"></el-input>
         </el-form-item>
         <el-form-item class="date-form-item">
           <el-date-picker
@@ -58,18 +58,23 @@ export default {
   },
   methods: {
     onSubmit () {
-      createBill(this.formData).then(res => {
-        console.log(1, res)
-      })
+      if (!this.formData.objName || !this.formData.objType || !this.formData.objPrice || !this.formData.objDate) {
+        this.$message.error('存在数据未填写')
+      } else {
+        createBill(this.formData).then(res => {
+          this.$router.push({
+            path: 'billManager'
+          })
+        })
+      }
     },
     onCancel () {
-      console.log(2)
       this.$emit('cancel')
     },
     format (value) {
       if (!value) { return }
       const year = value.getFullYear()
-      const day = (value.getDay() > 9) ? value.getDay() : ('0' + value.getDay())
+      const day = (value.getDate() > 9) ? value.getDate() : ('0' + value.getDate())
       let month = value.getMonth() + 1
       if (month < 10) {
         month = '0' + month
