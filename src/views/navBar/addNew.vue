@@ -61,15 +61,16 @@ export default {
       if (!this.formData.objName || !this.formData.objType || !this.formData.objPrice || !this.formData.objDate) {
         this.$message.error('存在数据未填写')
       } else {
+        this.$emit('close')
         createBill(this.formData).then(res => {
           this.$router.push({
-            path: 'billManager'
+            path: '/billManager'
           })
         })
       }
     },
     onCancel () {
-      this.$emit('cancel')
+      this.$emit('close')
     },
     format (value) {
       if (!value) { return }

@@ -1,6 +1,6 @@
 <template>
   <div class="countData-box">
-    <el-form :inline="true" :model="formData" class="form-box fixed-padding">
+    <el-form :inline="true" :model="formData" class="form-box">
       <el-form-item>
         <el-date-picker
           v-model="formData.objDate"
@@ -199,6 +199,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .countData-box {
+  // padding-bottom: 80px;
+  // box-sizing: border-box;
   .form-box {
     text-align: center;
     /deep/ .el-form-item {
@@ -214,9 +216,6 @@ export default {
   .box-card {
     width: 90%;
     margin: 15px 5%;
-  }
-  .fixed-padding {
-    margin-top: 80px;
   }
 }
 </style>

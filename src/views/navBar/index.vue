@@ -6,7 +6,7 @@
       <i class="el-icon-plus" @click="addBtn"></i>
     </div>
     <el-dialog title="新增" width="80%" v-if="showAddPanel"  :visible.sync="showAddPanel" append-to-body>
-      <add-new @cancel="closePanel"></add-new>
+      <add-new @close="closePanel"></add-new>
     </el-dialog>
   </div>
 </template>
