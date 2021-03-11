@@ -31,15 +31,31 @@
         <canvas id="pieChart" width="300" height="300"></canvas>
       </div>
     </el-card>
+    <el-card class="box-card">
+      <div slot="header" class="clearfix">
+        <div class="block">
+          <el-date-picker
+            v-model="yearData"
+            type="year"
+            placeholder="选择年"
+            @change="handleYearChange">
+          </el-date-picker>
+        </div>
+      </div>
+      <div class="text item">
+        <canvas id="lineChart" width="400" height="300"></canvas>
+      </div>
+    </el-card>
   </div>
 </template>
 
 <script>
 // import F2 from '@antv/f2'
 import F2 from '@antv/f2/lib/index-all'
-import { forTimeCount } from '@server/index'
+import { forTimeCount, forYearCount } from '@server/index'
 let chart = null
 let pieChart = null
+let lineChart = null
 
 export default {
   name: 'countData',
@@ -77,7 +93,9 @@ export default {
         startDate: '',
         endDate: ''
       },
-      chartData: []
+      chartData: [],
+      lineChartData: [],
+      yearData: ''
     }
   },
   created () {
@@ -146,6 +164,47 @@ export default {
       })
       pieChart.render()
     },
+    initLineChart () {
+      lineChart = new F2.Chart({
+        id: 'lineChart',
+        pixelRatio: window.devicePixelRatio
+      })
+      lineChart.source(this.lineChartData, {
+        value: {
+          tickCount: 5,
+          min: 0
+        },
+        month: {
+          range: [ 0, 1 ]
+        }
+      })
+      lineChart.tooltip({
+        showCrosshairs: true,
+        showItemMarker: false,
+        onShow: function onShow (ev) {
+          const items = ev.items
+          items[0].name = null
+          items[0].value = '$ ' + items[0].value
+        }
+      })
+      lineChart.axis('month', {
+        label: function label (text, index, total) {
+          const textCfg = {}
+          if (index === 0) {
+            textCfg.textAlign = 'left'
+          } else if (index === total - 1) {
+            textCfg.textAlign = 'right'
+          }
+          return textCfg
+        }
+      })
+      lineChart.line().position('month*value')
+      lineChart.point().position('month*value').style({
+        stroke: '#fff',
+        lineWidth: 1
+      })
+      lineChart.render()
+    },
     initDate (tag) {
       // 处理默认时间
       const endDate = new Date()
@@ -153,6 +212,7 @@ export default {
       const value = [startDate.getTime() - 3600 * 1000 * 24 * 7, endDate]
       this.formData.objDate = value
       this.handleSearcDateChange(value, tag)
+      this.handleYearChange()
     },
     handleSearcDateChange (date, tag) {
       const searchDate = ['startDate', 'endDate']
@@ -161,6 +221,14 @@ export default {
       }
       // 根据日期选择请求数据
       this.getCountData(tag)
+    },
+    handleYearChange (year) {
+      const startDate = this.format(new Date(year))
+      const endDate = startDate.slice(0, 4) + '-12-31'
+      forYearCount({startDate: startDate, endDate: endDate}).then(res => {
+        this.lineChartData = res.data
+        this.initLineChart()
+      })
     },
     getCountData (tag) {
       forTimeCount({ startDate: this.formData.startDate, endDate: this.formData.endDate }).then(res => {
@@ -179,7 +247,6 @@ export default {
         item.const = 'const'
         return item.value > 0
       })
-      console.log(33, tempData)
       return tempData
     },
     format (value) {

@@ -1,6 +1,6 @@
 import Express from 'express'
 import { responseClient } from '../utils'
-import { handleCountData } from '../index'
+import { handleCountData, handlBillDeatailList } from '../index'
 import BillType from '../../models/billTypeEnum'
 import BillDetail from '../../models/billDetail'
 import Register from '../../models/register'
@@ -82,7 +82,10 @@ router.post('/billDetailList', function (req, res) { // 根据类型过滤出对
     })
   } else {
     BillDetail.find().then(data => {
-      responseClient(res, 200, 200, '请求成功', data)
+      BillType.find().then(typeData => {
+        const tempData = handlBillDeatailList(data, typeData)
+        responseClient(res, 200, 200, '请求成功', tempData)
+      })
     }).catch(err => {
       responseClient(res)
     })
@@ -97,6 +100,30 @@ router.post('/forTimeCount', function (req, res) { // 根据时间区间得到�
       const tempData = handleCountData(data, typeData)
       responseClient(res, 200, 200, '请求成功', tempData)
     })
+  }).catch(err => {
+    responseClient(res)
+  })
+})
+
+// 根据年份计算每个值的总值
+router.post('/forYearCount', function(req, res) {
+  const { startDate, endDate } = req.body
+  // 按年份从数据库中取到数据
+  BillDetail.find({ objDate: {$lte:endDate, $gte:startDate} }).then(data => {
+    let tempData = []
+    for (let i = 1; i < 13; i++) {
+      tempData.push({ month: `${i}月`, value: 0 })
+      data.forEach((item) => {
+        const tag = item.objDate.slice(5, 7)
+        if (i === Number(tag)) {
+          tempData[i - 1].value += Number(item.objPrice)
+        }
+      })
+    }
+    console.log(5, data)
+    responseClient(res, 200, 200, '请求成功', tempData)
+    // data.reduce()
+    // 将数据库的数据经过处理分为12个坐标系
   }).catch(err => {
     responseClient(res)
   })

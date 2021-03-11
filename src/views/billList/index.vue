@@ -4,7 +4,7 @@
       <el-timeline>
         <el-timeline-item v-for="(item, index) in detailList" :key="index" :timestamp="item.objDate"  placement="top">
           <el-card>
-            <h4>{{item.objType}}</h4>
+            <h4>{{item.objLabel}} ({{item.objType}})</h4>
             <p>{{item.objName}}支出: {{item.objPrice}}元</p>
           </el-card>
         </el-timeline-item>

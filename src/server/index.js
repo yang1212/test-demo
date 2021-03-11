@@ -76,3 +76,14 @@ export function forTimeCount (param) {
     })
   })
 }
+
+export function forYearCount (param) {
+  let url = '/billType/forYearCount'
+  return new Promise((resolve, reject) => {
+    post(url, param).then((res) => {
+      resolve(res)
+    }).catch((data) => {
+      reject(data)
+    })
+  })
+}
