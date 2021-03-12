@@ -43,7 +43,7 @@
         </div>
       </div>
       <div class="text item">
-        <canvas id="lineChart" width="400" height="300"></canvas>
+        <div id="lineChart" style="width:400px; height:300px"></div>
       </div>
     </el-card>
   </div>
@@ -55,7 +55,6 @@ import F2 from '@antv/f2/lib/index-all'
 import { forTimeCount, forYearCount } from '@server/index'
 let chart = null
 let pieChart = null
-let lineChart = null
 
 export default {
   name: 'countData',
@@ -99,6 +98,7 @@ export default {
     }
   },
   created () {
+    this.yearData = new Date().getFullYear() + '-01-01'
   },
   mounted () {
     // 将初始化时间放置于mounted原因：解决数据接口返回过快，此时DOM未渲染完，图表初始化报错
@@ -165,45 +165,48 @@ export default {
       pieChart.render()
     },
     initLineChart () {
-      lineChart = new F2.Chart({
-        id: 'lineChart',
-        pixelRatio: window.devicePixelRatio
-      })
-      lineChart.source(this.lineChartData, {
-        value: {
-          tickCount: 5,
-          min: 0
+      let myChart = this.$echarts.init(document.getElementById('lineChart'))
+      let option
+      option = {
+        tooltip: {
+          trigger: 'axis'
         },
-        month: {
-          range: [ 0, 1 ]
-        }
-      })
-      lineChart.tooltip({
-        showCrosshairs: true,
-        showItemMarker: false,
-        onShow: function onShow (ev) {
-          const items = ev.items
-          items[0].name = null
-          items[0].value = '$ ' + items[0].value
-        }
-      })
-      lineChart.axis('month', {
-        label: function label (text, index, total) {
-          const textCfg = {}
-          if (index === 0) {
-            textCfg.textAlign = 'left'
-          } else if (index === total - 1) {
-            textCfg.textAlign = 'right'
+        legend: {
+          data: ['total', 'life', 'food', 'rent']
+        },
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
+        },
+        toolbox: {
+          feature: {
+            saveAsImage: {}
           }
-          return textCfg
-        }
-      })
-      lineChart.line().position('month*value')
-      lineChart.point().position('month*value').style({
-        stroke: '#fff',
-        lineWidth: 1
-      })
-      lineChart.render()
+        },
+        xAxis: {
+          type: 'category',
+          boundaryGap: false,
+          data: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [
+          {
+            name: 'total',
+            type: 'line',
+            data: this.lineChartData
+          },
+          {
+            name: 'life',
+            type: 'line',
+            data: this.lineChartData
+          }
+        ]
+      }
+      option && myChart.setOption(option)
     },
     initDate (tag) {
       // 处理默认时间
@@ -212,7 +215,7 @@ export default {
       const value = [startDate.getTime() - 3600 * 1000 * 24 * 7, endDate]
       this.formData.objDate = value
       this.handleSearcDateChange(value, tag)
-      this.handleYearChange()
+      this.handleYearChange(this.yearData)
     },
     handleSearcDateChange (date, tag) {
       const searchDate = ['startDate', 'endDate']
@@ -227,6 +230,7 @@ export default {
       const endDate = startDate.slice(0, 4) + '-12-31'
       forYearCount({startDate: startDate, endDate: endDate}).then(res => {
         this.lineChartData = res.data
+        console.log(5, res.data)
         this.initLineChart()
       })
     },

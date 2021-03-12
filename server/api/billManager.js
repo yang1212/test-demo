@@ -105,25 +105,61 @@ router.post('/forTimeCount', function (req, res) { // 根据时间区间得到�
   })
 })
 
+router.post('/forYearCount', function(req, res) { 
+  const { startDate, endDate } = req.body
+  BillDetail.find({ objDate: {$lte:endDate, $gte:startDate} }).then(data => {
+    // 将数据库的数据经过处理分为12个坐标系
+    let tempData = []
+    for (let i = 0; i < 12; i++) {
+      tempData.push(0)
+      data.forEach((item) => {
+        const tag = item.objDate.slice(5, 7)
+        if (i === Number(tag)) {
+          tempData[i - 1] += Number(item.objPrice)
+        }
+      })
+    }
+    responseClient(res, 200, 200, '请求成功', tempData)
+  })
+})
+
 // 根据年份计算每个值的总值
 router.post('/forYearCount', function(req, res) {
   const { startDate, endDate } = req.body
   // 按年份从数据库中取到数据
   BillDetail.find({ objDate: {$lte:endDate, $gte:startDate} }).then(data => {
-    let tempData = []
-    for (let i = 1; i < 13; i++) {
-      tempData.push({ month: `${i}月`, value: 0 })
-      data.forEach((item) => {
-        const tag = item.objDate.slice(5, 7)
-        if (i === Number(tag)) {
-          tempData[i - 1].value += Number(item.objPrice)
-        }
-      })
-    }
-    console.log(5, data)
-    responseClient(res, 200, 200, '请求成功', tempData)
-    // data.reduce()
-    // 将数据库的数据经过处理分为12个坐标系
+    BillType.find().then(typeData => {
+      let tempData = {
+        total: []
+      }
+      console.log(3, typeData)
+      // 将数据库的数据经过处理分为12个坐标系
+      for (let i = 1; i < 13; i++) {
+        tempData.total.push(0)
+        typeData.forEach((item) => {
+          tempData[item.code] = []
+        })
+        data.forEach((item) => {
+          const tag = item.objDate.slice(5, 7) // 取得数据的月份
+          if (Number(tag) === i) {
+            tempData.total[i - 1] += Number(item.objPrice)
+          }
+        })
+      }
+      responseClient(res, 200, 200, '请求成功', tempData)
+      // const temp = handleCountData(data, typeData)
+    })
+    // // 将数据库的数据经过处理分为12个坐标系
+    // for (let i = 0; i < 12; i++) {
+    //   tempData.total.push(0)
+    //   data.forEach((item) => {
+    //     const tag = item.objDate.slice(5, 7)
+    //     if (i === Number(tag)) {
+    //       tempData.total[i - 1] += Number(item.objPrice)
+    //     }
+    //   })
+    // }
+    // responseClient(res, 200, 200, '请求成功', tempData)
   }).catch(err => {
     responseClient(res)
   })
