@@ -281,6 +281,7 @@ export default {
 .countData-box {
   // padding-bottom: 80px;
   // box-sizing: border-box;
+  width: 95%;
   .form-box {
     text-align: center;
     /deep/ .el-form-item {
