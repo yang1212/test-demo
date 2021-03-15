@@ -43,10 +43,17 @@ export default {
   },
   methods: {
     onLogin () {
+      if (!this.formData.objName || !this.formData.password) {
+        this.$message.error('请输入用户名和密码进行登录')
+      }
       login(this.formData).then(res => {
-        this.$router.push({
-          path: 'billManager'
-        })
+        if (res.data.length > 0) {
+          this.$message.error('请输入正确的用户名和密码进行登录')
+        } else {
+          this.$router.push({
+            path: 'billManager'
+          })
+        }
       })
     },
     onRegister () {

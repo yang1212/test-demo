@@ -70,10 +70,10 @@ export default {
 <style scoped lang="scss">
 .register-box {
   width: 100%;
-  padding-top: 20%;
+  padding-top: 100px;
   .box-card {
-    width: 80%;
-    margin: 0 10%;
+    width: 300px;
+    margin: 0 auto;
     .confirm-btn {
       /deep/ .el-button {
         width: 100%;
