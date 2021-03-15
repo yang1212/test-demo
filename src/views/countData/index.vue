@@ -172,7 +172,7 @@ export default {
           trigger: 'axis'
         },
         legend: {
-          data: ['total', 'life', 'food', 'rent']
+          data: ['total', 'life', 'food', 'clothes']
         },
         grid: {
           left: '3%',
@@ -197,12 +197,22 @@ export default {
           {
             name: 'total',
             type: 'line',
-            data: this.lineChartData
+            data: this.lineChartData.total
           },
           {
             name: 'life',
             type: 'line',
-            data: this.lineChartData
+            data: this.lineChartData.life
+          },
+          {
+            name: 'food',
+            type: 'line',
+            data: this.lineChartData.food
+          },
+          {
+            name: 'clothes',
+            type: 'line',
+            data: this.lineChartData.clothes
           }
         ]
       }
@@ -230,7 +240,6 @@ export default {
       const endDate = startDate.slice(0, 4) + '-12-31'
       forYearCount({startDate: startDate, endDate: endDate}).then(res => {
         this.lineChartData = res.data
-        console.log(5, res.data)
         this.initLineChart()
       })
     },
