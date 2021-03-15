@@ -45,12 +45,12 @@ export default {
     onLogin () {
       if (!this.formData.objName || !this.formData.password) {
         this.$message.error('请输入用户名和密码进行登录')
-        return
+        return true
       }
       login(this.formData).then(res => {
         if (res.data.length > 0) {
           this.$message.error('请输入正确的用户名和密码进行登录')
-          return
+          return true
         } else {
           this.$router.push({
             path: 'billManager'
