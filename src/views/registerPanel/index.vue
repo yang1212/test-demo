@@ -72,7 +72,7 @@ export default {
   width: 100%;
   padding-top: 100px;
   .box-card {
-    width: 300px;
+    width: 90%;
     margin: 0 auto;
     .confirm-btn {
       /deep/ .el-button {

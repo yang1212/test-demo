@@ -20,7 +20,7 @@
         <span>柱状图</span>
       </div>
       <div class="text item">
-        <canvas id="myChart" width="400" height="260"></canvas>
+        <canvas id="myChart" width="300" height="260"></canvas>
       </div>
     </el-card>
     <el-card class="box-card">
@@ -43,7 +43,7 @@
         </div>
       </div>
       <div class="text item">
-        <div id="lineChart" style="width:400px; height:300px"></div>
+        <div id="lineChart" style="width:300px; height:300px"></div>
       </div>
     </el-card>
   </div>
@@ -180,11 +180,6 @@ export default {
           bottom: '3%',
           containLabel: true
         },
-        toolbox: {
-          feature: {
-            saveAsImage: {}
-          }
-        },
         xAxis: {
           type: 'category',
           boundaryGap: false,
@@ -279,9 +274,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .countData-box {
-  // padding-bottom: 80px;
-  // box-sizing: border-box;
-  width: 95%;
+  width: 350px;
+  margin: 0 auto;
   .form-box {
     text-align: center;
     /deep/ .el-form-item {
