@@ -35,7 +35,8 @@
 </template>
 
 <script>
-import { getTypeData, createBill } from '@server/index'
+import { getTypeData, createBill, billDetailList } from '@server/index'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'addNew',
@@ -57,12 +58,18 @@ export default {
     })
   },
   methods: {
+    ...mapActions('homeData', [
+      'updateDetailList'
+    ]),
     onSubmit () {
       if (!this.formData.objName || !this.formData.objType || !this.formData.objPrice || !this.formData.objDate) {
         this.$message.error('存在数据未填写')
       } else {
         this.$emit('close')
         createBill(this.formData).then(res => {
+          billDetailList().then(res => {
+            this.updateDetailList(res.data)
+          })
           this.$router.push({
             path: '/billManager'
           })

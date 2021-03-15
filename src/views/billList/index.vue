@@ -2,10 +2,20 @@
   <div class="bill-box">
     <div class="detail-box">
       <el-timeline>
-        <el-timeline-item v-for="(item, index) in detailList" :key="index" :timestamp="item.objDate"  placement="top">
+        <el-timeline-item v-for="(item, index) in detailList" :key="index" :timestamp="item.objDate"  placement="top" v-show="detailList.length > 0">
           <el-card>
             <h4>{{item.objLabel}} ({{item.objType}})</h4>
             <p>{{item.objName}}支出: {{item.objPrice}}元</p>
+          </el-card>
+        </el-timeline-item>
+        <el-timeline-item  placement="top" v-show="detailList.length === 0">
+          <el-card>
+            <p>暂无数据</p>
+          </el-card>
+        </el-timeline-item>
+        <el-timeline-item  placement="top" v-show="detailList.length === 0">
+          <el-card>
+            <p>右上角可添加数据</p>
           </el-card>
         </el-timeline-item>
       </el-timeline>
@@ -15,6 +25,7 @@
 
 <script>
 import { billDetailList } from '@server/index'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'home',
@@ -22,15 +33,23 @@ export default {
   },
   data () {
     return {
-      detailList: []
+      curDate: new Date()
     }
   },
   created () {
     billDetailList().then(res => {
-      this.detailList = res.data
+      this.updateDetailList(res.data)
     })
   },
+  computed: {
+    ...mapGetters('homeData', [
+      'detailList'
+    ])
+  },
   methods: {
+    ...mapActions('homeData', [
+      'updateDetailList'
+    ]),
     goCountPage () {
       this.$router.push({
         path: 'countData'

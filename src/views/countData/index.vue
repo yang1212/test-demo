@@ -172,7 +172,7 @@ export default {
           trigger: 'axis'
         },
         legend: {
-          data: ['total', 'life', 'food', 'clothes']
+          data: ['综合', '生活', '饮食', '服饰']
         },
         grid: {
           left: '3%',
@@ -190,22 +190,22 @@ export default {
         },
         series: [
           {
-            name: 'total',
+            name: '综合',
             type: 'line',
             data: this.lineChartData.total
           },
           {
-            name: 'life',
+            name: '生活',
             type: 'line',
             data: this.lineChartData.life
           },
           {
-            name: 'food',
+            name: '饮食',
             type: 'line',
             data: this.lineChartData.food
           },
           {
-            name: 'clothes',
+            name: '服饰',
             type: 'line',
             data: this.lineChartData.clothes
           }
