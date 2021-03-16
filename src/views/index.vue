@@ -1,5 +1,6 @@
 <template>
   <div class="container-box">
+    <div class="masklayer"></div>
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <span>登录</span>
@@ -48,7 +49,7 @@ export default {
         return true
       }
       login(this.formData).then(res => {
-        if (res.data.length > 0) {
+        if (res.data.length === 0) {
           this.$message.error('请输入正确的用户名和密码进行登录')
           return true
         } else {
@@ -74,10 +75,13 @@ export default {
 <style scoped lang="scss">
 .container-box {
   width: 100%;
-  padding-top: 100px;
+  height: 100%;
+  background: url("../../static/loginBg.png");
   .box-card {
-    width: 90%;
+    width: 80%;
     margin: 0 auto;
+    position: relative;
+    top: 100px;
     .text-btn {
       font-size: 14px;
       span:first-child {
@@ -95,5 +99,13 @@ export default {
       }
     }
   }
+}
+.masklayer {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, .6);
 }
 </style>

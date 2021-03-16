@@ -1,5 +1,6 @@
 <template>
   <div class="register-box">
+    <div class="masklayer"></div>
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <span>注册</span>
@@ -70,9 +71,12 @@ export default {
 <style scoped lang="scss">
 .register-box {
   width: 100%;
-  padding-top: 100px;
+  height: 100%;
+  background: url("../../../static/loginBg.png");
   .box-card {
-    width: 90%;
+    position: relative;
+    top: 100px;
+    width: 80%;
     margin: 0 auto;
     .confirm-btn {
       /deep/ .el-button {
@@ -81,5 +85,13 @@ export default {
       }
     }
   }
+}
+.masklayer {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, .6);
 }
 </style>
