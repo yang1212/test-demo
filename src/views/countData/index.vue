@@ -2,8 +2,7 @@
   <div class="countData-box">
     <el-form :inline="true" :model="formData" class="form-box">
       <el-form-item>
-        <input type="text" id="input" v-model="formData.objDate">
-        <!-- <el-date-picker
+        <el-date-picker
           v-model="formData.objDate"
           type="daterange"
           align="right"
@@ -13,7 +12,7 @@
           end-placeholder="结束日期"
           :picker-options="pickerOptions"
           @change="handleSearcDateChange">
-        </el-date-picker> -->
+        </el-date-picker>
       </el-form-item>
     </el-form>
     <el-card class="box-card">
