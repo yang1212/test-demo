@@ -43,7 +43,7 @@
         </div>
       </div>
       <div class="text item">
-        <div id="lineChart" style="width:300px; height:300px"></div>
+        <div id="lineChart" style="width:100%; height:300px"></div>
       </div>
     </el-card>
   </div>
@@ -274,23 +274,20 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .countData-box {
-  width: 350px;
   margin: 0 auto;
   .form-box {
     text-align: center;
+    width: 90%;
+    margin-left: 5%;
     /deep/ .el-form-item {
       margin-bottom: 15px;
     }
-    /deep/ .el-form-item,  /deep/ .el-form-item__content {
+    /deep/ .el-form-item,  /deep/ .el-form-item__content, /deep/ .el-input__inner {
       width: 100%;
-      .el-date-editor {
-        width: 90%;
-      }
     }
   }
   .box-card {
-    width: 90%;
-    margin: 15px 5%;
+    margin: 15px 15px;
   }
 }
 </style>

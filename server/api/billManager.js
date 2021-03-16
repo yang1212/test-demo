@@ -105,25 +105,6 @@ router.post('/forTimeCount', function (req, res) { // 根据时间区间得到�
   })
 })
 
-router.post('/forYearCount1', function(req, res) { 
-  const { startDate, endDate } = req.body
-  // 按年份从数据库中取到数据
-  BillDetail.find({ objDate: {$lte:endDate, $gte:startDate} }).then(data => {
-    // 将数据库的数据经过处理分为12个坐标系
-    let tempData = []
-    for (let i = 1; i < 13; i++) {
-      tempData.push(0)
-      data.forEach((item) => {
-        const tag = item.objDate.slice(5, 7)
-        if (i === Number(tag)) {
-          tempData[i - 1] += Number(item.objPrice)
-        }
-      })
-    }
-    responseClient(res, 200, 200, '请求成功', tempData)
-  })
-})
-
 router.post('/forYearCount', function(req, res) {
   const { startDate, endDate } = req.body
   BillDetail.find({ objDate: {$lte:endDate, $gte:startDate} }).then(data => {
@@ -134,7 +115,7 @@ router.post('/forYearCount', function(req, res) {
       typeData.forEach((item) => {
         tempData[item.code] = []
       })
-      for (let i = 1; i < 12; i++) {
+      for (let i = 1; i < 13; i++) {
         for (let j in tempData) {
           tempData[j].push(0)
         }
