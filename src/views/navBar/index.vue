@@ -5,9 +5,20 @@
       <i class="el-icon-pie-chart" @click="handleSelect"></i>
       <i class="el-icon-plus" @click="addBtn"></i>
     </div>
-    <el-dialog title="新增" width="80%" v-if="showAddPanel"  :visible.sync="showAddPanel" append-to-body>
+    <el-drawer
+      title="新增"
+      append-to-body
+      size="100%"
+      direction="ltr"
+      custom-class="demo-drawer"
+      ref="drawer"
+      destroy-on-close
+      :visible.sync="showAddPanel">
       <add-new @close="closePanel"></add-new>
-    </el-dialog>
+    </el-drawer>  
+    <!-- <el-dialog title="新增" width="80%" v-if="showAddPanel"  :visible.sync="showAddPanel" append-to-body>
+      <add-new @close="closePanel"></add-new>
+    </el-dialog> -->
   </div>
 </template>
 

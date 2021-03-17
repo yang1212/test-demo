@@ -1,36 +1,34 @@
 <template>
-  <div>
-    <div class="filter-box">
-      <el-form :model="formData" class="form-data">
-        <el-form-item>
-          <el-input v-model="formData.objName" placeholder="名称"></el-input>
-        </el-form-item>
-        <el-form-item class="select-form-item">
-          <el-select v-model="formData.objType" placeholder="类型">
-            <el-option v-for="(item, index) in obyTypeEnum"
-                       :key="index"
-                       :label="item.label"
-                       :value="item.code">
-            </el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item>
-          <el-input v-model="formData.objPrice" placeholder="价格"></el-input>
-        </el-form-item>
-        <el-form-item class="date-form-item">
-          <el-date-picker
-            v-model="formData.objDate"
-            value-format="yyyy-MM-dd"
-            type="date"
-            placeholder="objDate">
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item class="btn-group">
-          <el-button type="primary" @click="onCancel" size="small">取消</el-button>
-          <el-button type="primary" @click="onSubmit" size="small">确认</el-button>
-        </el-form-item>
-      </el-form>
-    </div>
+  <div class="add-new-box">
+    <el-form :model="formData" class="form-data">
+      <el-form-item>
+        <el-input v-model="formData.objName" placeholder="名称"></el-input>
+      </el-form-item>
+      <el-form-item class="select-form-item">
+        <el-select v-model="formData.objType" placeholder="类型">
+          <el-option  v-for="(item, index) in obyTypeEnum"
+                      :key="index"
+                      :label="item.label"
+                      :value="item.code">
+          </el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item>
+        <el-input v-model="formData.objPrice" placeholder="价格"></el-input>
+      </el-form-item>
+      <el-form-item class="date-form-item">
+        <el-date-picker
+          v-model="formData.objDate"
+          value-format="yyyy-MM-dd"
+          type="date"
+          placeholder="objDate">
+        </el-date-picker>
+      </el-form-item>
+      <el-form-item class="btn-group">
+        <el-button  @click="onCancel">取消</el-button>
+        <el-button  @click="onSubmit">确认</el-button>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
@@ -94,22 +92,30 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.form-data {
-  /deep/ .el-form-item__content {
-    width: 100%;
-  }
-  .select-form-item {
-    /deep/ .el-select {
+.add-new-box {
+  padding: 20px 40px;
+  .form-data {
+    /deep/ .el-form-item__content {
       width: 100%;
     }
-  }
-  .date-form-item {
-    /deep/ .el-date-editor {
-      width: 100%;
+    .select-form-item {
+      /deep/ .el-select {
+        width: 100%;
+      }
     }
-  }
-  .btn-group {
-    text-align: right;
+    .date-form-item {
+      /deep/ .el-date-editor {
+        width: 100%;
+      }
+    }
+    .btn-group {
+      text-align: right;
+      /deep/ .el-button {
+        background: #f56c6c;
+        color: #fff;
+        border: none;
+      }
+    }
   }
 }
 </style>

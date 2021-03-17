@@ -10,12 +10,12 @@ export default new Router({
       path: '',
       name: 'index',
       // redirect: 'blogManager/home',
-      component: () => import(/* webpackChunkName: 'index' */ '../views/index')
+      component: () => import(/* webpackChunkName: 'login' */ '../views/index')
     },
     {
       path: '/register',
       name: 'register',
-      component: () => import(/* webpackChunkName: 'tab1' */ '../views/registerPanel/index')
+      component: () => import(/* webpackChunkName: 'register' */ '../views/registerPanel/index')
     },
     {
       path: '/billManager',
@@ -32,6 +32,11 @@ export default new Router({
           path: 'countData',
           name: 'countData',
           component: () => import(/* webpackChunkName: 'tab1' */ '../views/countData/index')
+        },
+        {
+          path: 'memberInfo',
+          name: 'memberInfo',
+          component: () => import(/* webpackChunkName: 'tab1' */ '../views/memberInfo/index')
         }
       ]
     }
