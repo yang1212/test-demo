@@ -92,6 +92,15 @@ router.post('/billDetailList', function (req, res) { // 根据类型过滤出对
   }
 })
 
+router.post('/delListData', (req, res) => {
+  const { id } = req.body;
+  BillDetail.remove({ '_id': id }).then(data => {
+    responseClient(res, 200, 200, '删除成功', data)
+  }).cancel(err => {
+    responseClient(res);
+  })
+})
+
 // forTimeCount
 router.post('/forTimeCount', function (req, res) { // 根据时间区间得到数据，并累加
   const { startDate, endDate } = req.body
@@ -105,7 +114,7 @@ router.post('/forTimeCount', function (req, res) { // 根据时间区间得到�
   })
 })
 
-router.post('/forYearCount', function(req, res) {
+router.post('/forYearCount', function(req, res) { // 根据年份计算每个类型每个月份的值
   const { startDate, endDate } = req.body
   BillDetail.find({ objDate: {$lte:endDate, $gte:startDate} }).then(data => {
     BillType.find().then(typeData => {

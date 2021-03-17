@@ -18,7 +18,7 @@ export function handlBillDeatailList (orginData, typeData) {
   // })
   let tempData = []
   orginData.forEach((item, index) => {
-    tempData.push({ objDate: item.objDate, objName: item.objName, objPrice: item.objPrice, objType: item.objType, objLabel: '' })
+    tempData.push({ objDate: item.objDate, objName: item.objName, objPrice: item.objPrice, objType: item.objType, objLabel: '', id: item._id })
     let temp = typeData.filter((items) => {
       return items.code === item.objType
     })

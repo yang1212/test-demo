@@ -6,6 +6,7 @@
           <el-card>
             <h4>{{item.objLabel}} ({{item.objType}})</h4>
             <p>{{item.objName}}支出: {{item.objPrice}}元</p>
+            <span class="delete-btn" @click="handleDelete(item)"><i class="el-icon-delete"></i></span>
           </el-card>
         </el-timeline-item>
         <el-timeline-item  placement="top" v-show="detailList.length === 0">
@@ -24,7 +25,7 @@
 </template>
 
 <script>
-import { billDetailList } from '@server/index'
+import { billDetailList, delListData } from '@server/index'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
@@ -37,9 +38,7 @@ export default {
     }
   },
   created () {
-    billDetailList().then(res => {
-      this.updateDetailList(res.data)
-    })
+    this.getDetailList()
   },
   computed: {
     ...mapGetters('homeData', [
@@ -50,9 +49,20 @@ export default {
     ...mapActions('homeData', [
       'updateDetailList'
     ]),
+    getDetailList () {
+      billDetailList().then(res => {
+        this.updateDetailList(res.data)
+      })
+    },
     goCountPage () {
       this.$router.push({
         path: 'countData'
+      })
+    },
+    handleDelete (data) {
+      delListData({id: data.id}).then(res => {
+        this.$message.success('删除成功')
+        this.getDetailList()
       })
     }
   }
@@ -61,8 +71,6 @@ export default {
 
 <style lang="scss" scoped>
 .bill-box {
-  // padding-bottom: 80px;
-  // box-sizing: border-box;
   .filter-box {
     /deep/ .el-form-item,  /deep/ .el-form-item__content,  /deep/ .el-select {
       width: 100%;
@@ -70,6 +78,16 @@ export default {
   }
   .detail-box {
     padding: 0 20px;
+    .delete-btn {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      cursor: pointer;
+      i {
+        font-weight: bold;
+        color: #409eff;
+      }
+    }
   }
 }
 </style>
