@@ -83,7 +83,7 @@ export default {
       chart.source(this.chartData)
 
       // Step 3：创建图形语法，绘制柱状图，由 genre 和 sold 两个属性决定图形位置，genre 映射至 x 轴，sold 映射至 y 轴
-      chart.interval().position('type*value').color('type')
+      chart.interval().position('label*value').color('label')
 
       // Step 4: 渲染图表
       chart.render()
@@ -123,7 +123,7 @@ export default {
         },
         label2: function label2 (data) {
           return {
-            text: data.type,
+            text: data.label,
             fill: '#999'
           }
         }
