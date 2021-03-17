@@ -1,20 +1,11 @@
 <template>
   <div class="countData-box">
-    <el-form :inline="true" :model="formData" class="form-box">
-      <el-form-item>
-        <el-date-picker
-          v-model="formData.objDate"
-          type="daterange"
-          align="right"
-          unlink-panels
-          range-separator="至"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-          :picker-options="pickerOptions"
-          @change="handleSearcDateChange">
-        </el-date-picker>
-      </el-form-item>
-    </el-form>
+    <el-row>
+      <el-form :model="formData">
+        <el-col :span="10" :offset="1" class="col-input"><i class="el-icon-date"></i><el-input id="dateStart" v-model="formData.startDate"></el-input></el-col>
+        <el-col :span="10" :offset="2" class="col-input"><i class="el-icon-date"></i><el-input id="dateEnd" v-model="formData.endDate"></el-input></el-col>
+      </el-form>
+    </el-row>
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <span>柱状图</span>
@@ -50,8 +41,8 @@
 </template>
 
 <script>
-// import F2 from '@antv/f2'
 import F2 from '@antv/f2/lib/index-all'
+import Rolldate from 'rolldate'
 import { forTimeCount, forYearCount } from '@server/index'
 let chart = null
 let pieChart = null
@@ -60,35 +51,7 @@ export default {
   name: 'countData',
   data () {
     return {
-      pickerOptions: {
-        shortcuts: [{
-          text: '最近一周',
-          onClick (picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-            picker.$emit('pick', [start, end])
-          }
-        }, {
-          text: '最近一个月',
-          onClick (picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-            picker.$emit('pick', [start, end])
-          }
-        }, {
-          text: '最近三个月',
-          onClick (picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
-            picker.$emit('pick', [start, end])
-          }
-        }]
-      },
       formData: {
-        objDate: '',
         startDate: '',
         endDate: ''
       },
@@ -98,7 +61,10 @@ export default {
     }
   },
   created () {
+    // 处理默认时间
     this.yearData = new Date().getFullYear() + '-01-01'
+    this.formData.endDate = this.format(new Date())
+    this.formData.startDate = this.format(new Date(new Date().getTime() - 3600 * 1000 * 24 * 7))
   },
   mounted () {
     // 将初始化时间放置于mounted原因：解决数据接口返回过快，此时DOM未渲染完，图表初始化报错
@@ -214,21 +180,28 @@ export default {
       option && myChart.setOption(option)
     },
     initDate (tag) {
-      // 处理默认时间
-      const endDate = new Date()
-      const startDate = new Date()
-      const value = [startDate.getTime() - 3600 * 1000 * 24 * 7, endDate]
-      this.formData.objDate = value
-      this.handleSearcDateChange(value, tag)
+      let self = this
+      // eslint-disable-next-line no-new
+      new Rolldate({
+        el: '#dateStart',
+        format: 'YYYY-MM-DD',
+        confirm: function (date) {
+          self.formData.startDate = date
+          self.getCountData()
+        }
+      })
+      // eslint-disable-next-line no-new
+      new Rolldate({
+        el: '#dateEnd',
+        format: 'YYYY-MM-DD',
+        confirm: function (date) {
+          self.formData.endDate = date
+          self.getCountData()
+        }
+      })
+      // 根据日期选择初始化请求数据
+      this.getCountData('init')
       this.handleYearChange(this.yearData)
-    },
-    handleSearcDateChange (date, tag) {
-      const searchDate = ['startDate', 'endDate']
-      for (let i = 0; i < searchDate.length; i++) {
-        this.formData[searchDate[i]] = this.format(new Date(date[i]))
-      }
-      // 根据日期选择请求数据
-      this.getCountData(tag)
     },
     handleYearChange (year) {
       const startDate = this.format(new Date(year))
@@ -275,16 +248,18 @@ export default {
 <style scoped lang="scss">
 .countData-box {
   margin: 0 auto;
-  .form-box {
-    text-align: center;
-    width: 90%;
-    margin-left: 5%;
-    overflow-x: auto;
-    /deep/ .el-form-item {
-      margin-bottom: 15px;
+  .col-input {
+    position: relative;
+    i {
+      position: absolute;
+      top: 9px;
+      left: 7px;
+      z-index: 1;
     }
-    /deep/ .el-form-item,  /deep/ .el-form-item__content, /deep/ .el-input__inner {
-      width: 100%;
+    /deep/ .el-input {
+      input {
+        padding-left: 30px;
+      }
     }
   }
   .box-card {
