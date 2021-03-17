@@ -14,7 +14,7 @@
           <el-input v-model="formData.confirmPassword" placeholder="确认密码"></el-input>
         </el-form-item>
         <el-form-item class="confirm-btn">
-          <el-button type="primary" @click="confirmBtn" size="small">确认</el-button>
+          <el-button @click="confirmBtn" size="small">确认</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -77,7 +77,7 @@ export default {
     .login-text {
       width: 50px;
       border-bottom: 5px solid #fff;
-      padding-bottom: 15px; 
+      padding-bottom: 15px;
       span {
         font-size: 28px;
         font-weight: bold;
@@ -97,9 +97,12 @@ export default {
         /deep/ .el-button {
           width: 100%;
           margin-top: 20px;
+          background: #f56c6c;
+          color: #fff;
+          border: none;
         }
       }
-    }  
+    }
   }
 }
 .masklayer {

@@ -50,7 +50,7 @@ export default {
 .nav-box {
   position: fixed;
   top: 0;
-  background: #409eff;
+  background: #f56c6c;
   box-shadow: 0px 5px 5px gray;
   width: 100%;
   height: 60px;

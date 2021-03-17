@@ -2,7 +2,7 @@
   <div class="bill-box">
     <div class="detail-box">
       <el-timeline>
-        <el-timeline-item v-for="(item, index) in detailList" :key="index" :timestamp="item.objDate"  placement="top" v-show="detailList.length > 0">
+        <el-timeline-item v-for="(item, index) in detailList" :key="index" :timestamp="item.objDate"  placement="top"  v-show="detailList.length > 0">
           <el-card>
             <h4>{{item.objLabel}} ({{item.objType}})</h4>
             <p>{{item.objName}}支出: {{item.objPrice}}元</p>
@@ -12,11 +12,6 @@
         <el-timeline-item  placement="top" v-show="detailList.length === 0">
           <el-card>
             <p>暂无数据</p>
-          </el-card>
-        </el-timeline-item>
-        <el-timeline-item  placement="top" v-show="detailList.length === 0">
-          <el-card>
-            <p>右上角可添加数据</p>
           </el-card>
         </el-timeline-item>
       </el-timeline>
@@ -85,7 +80,7 @@ export default {
       cursor: pointer;
       i {
         font-weight: bold;
-        color: #409eff;
+        color: #f56c6c;
       }
     }
   }

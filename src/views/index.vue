@@ -11,7 +11,7 @@
           <el-input v-model="formData.password" placeholder="密码"></el-input>
         </el-form-item>
         <el-form-item class="login-btn">
-          <el-button type="primary" @click="onLogin">登录</el-button>
+          <el-button  @click="onLogin">登录</el-button>
         </el-form-item>
         <p class="text-btn">
           <span @click="onRegister" class="common-text">立即注册</span>
@@ -81,7 +81,7 @@ export default {
     .login-text {
       width: 50px;
       border-bottom: 5px solid #fff;
-      padding-bottom: 15px; 
+      padding-bottom: 15px;
       span {
         font-size: 28px;
         font-weight: bold;
@@ -110,6 +110,9 @@ export default {
         /deep/ .el-button {
           width: 100%;
           margin: 20px 0 30px 0;
+          background: #f56c6c;
+          color: #fff;
+          border: none;
         }
       }
     }
