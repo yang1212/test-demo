@@ -1,27 +1,23 @@
 <template>
   <div class="register-box">
     <div class="masklayer"></div>
-    <el-card class="box-card">
-      <div slot="header" class="clearfix">
-        <span>注册</span>
-      </div>
-      <div class="text item">
-        <el-form :model="formData">
-          <el-form-item>
-            <el-input v-model="formData.objName" placeholder="objName"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-input v-model="formData.password" placeholder="password"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-input v-model="formData.confirmPassword" placeholder="confirmPassword"></el-input>
-          </el-form-item>
-          <el-form-item class="confirm-btn">
-            <el-button type="primary" @click="confirmBtn" size="small">confirm</el-button>
-          </el-form-item>
-        </el-form>
-      </div>
-    </el-card>
+    <div class="box-card">
+      <div class="login-text"><span>Register</span></div>
+      <el-form :model="formData" class="form-box">
+        <el-form-item>
+          <el-input v-model="formData.objName" placeholder="用户名"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-input v-model="formData.password" placeholder="密码"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-input v-model="formData.confirmPassword" placeholder="确认密码"></el-input>
+        </el-form-item>
+        <el-form-item class="confirm-btn">
+          <el-button type="primary" @click="confirmBtn" size="small">确认</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
   </div>
 </template>
 
@@ -76,14 +72,34 @@ export default {
   .box-card {
     position: relative;
     top: 100px;
-    width: 80%;
+    width: 75%;
     margin: 0 auto;
-    .confirm-btn {
-      /deep/ .el-button {
-        width: 100%;
-        margin-top: 20px;
+    .login-text {
+      width: 50px;
+      border-bottom: 5px solid #fff;
+      padding-bottom: 15px; 
+      span {
+        font-size: 28px;
+        font-weight: bold;
+        color: #fff;
       }
     }
+    .form-box {
+      margin-top: 50px;
+      /deep/ .el-input__inner {
+        border: 1px solid transparent;
+        border-bottom: 1px solid #929090;
+        background: transparent;
+        border-radius: 0;
+        color: #fff;
+      }
+      .confirm-btn {
+        /deep/ .el-button {
+          width: 100%;
+          margin-top: 20px;
+        }
+      }
+    }  
   }
 }
 .masklayer {
@@ -92,6 +108,6 @@ export default {
   height: 100%;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, .6);
+  background-color: rgba(0, 0, 0, .8);
 }
 </style>
