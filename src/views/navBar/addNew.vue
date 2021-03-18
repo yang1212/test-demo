@@ -93,6 +93,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../assets/index.scss';
 .add-new-box {
   padding: 20px 40px;
   .form-data {
@@ -112,7 +113,7 @@ export default {
     .btn-group {
       text-align: right;
       /deep/ .el-button {
-        background: #f56c6c;
+        background: $primary-color;
         color: #fff;
         border: none;
       }

@@ -1,7 +1,11 @@
 <template>
   <div class="member-box">
-    <div>useName</div>
-    <el-button @click="loginOut">login out</el-button>
+    <div class="member-info">
+      <el-avatar size="small" src="https://d36jcksde1wxzq.cloudfront.net/saas-mega/whiteFingerprint.png"></el-avatar>
+    </div>
+    <div class="login-out" @click="loginOut">
+      Login out
+    </div>
   </div>
 </template>
 
@@ -27,4 +31,16 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.member-box {
+  .member-info {
+    height: 200px;
+    line-height: 200px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+  }
+  .login-out {
+    height: 100px;
+    border-bottom: 1px solid #eee;
+  }
+}
 </style>

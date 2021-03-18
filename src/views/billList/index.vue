@@ -65,6 +65,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../assets/index.scss';
 .bill-box {
   .filter-box {
     /deep/ .el-form-item,  /deep/ .el-form-item__content,  /deep/ .el-select {
@@ -80,7 +81,7 @@ export default {
       cursor: pointer;
       i {
         font-weight: bold;
-        color: #f56c6c;
+        color: $primary-color;
       }
     }
   }

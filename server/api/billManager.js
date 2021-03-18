@@ -1,6 +1,6 @@
 import Express from 'express'
 import { responseClient } from '../utils'
-import { handleCountData, handlBillDeatailList } from '../index'
+import { handleCountData } from '../index'
 import BillType from '../../models/billTypeEnum'
 import BillDetail from '../../models/billDetail'
 import Register from '../../models/register'

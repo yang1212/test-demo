@@ -3,7 +3,7 @@
     <div class="home-tag" @click="chooseLogo"><el-avatar size="small" src="https://d36jcksde1wxzq.cloudfront.net/saas-mega/whiteFingerprint.png"></el-avatar></div>
     <div class="nav-list">
       <i class="el-icon-pie-chart" @click="handleMember"></i>
-       <i class="el-icon-pie-chart" @click="handleSelect"></i>
+      <i class="el-icon-pie-chart" @click="handleSelect"></i>
       <i class="el-icon-plus" @click="addBtn"></i>
     </div>
     <el-drawer
@@ -64,10 +64,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+@import '../../assets/index.scss';
 .nav-box {
   position: fixed;
   top: 0;
-  background: #f56c6c;
+  background: $primary-color;
   box-shadow: 0px 5px 5px gray;
   width: 100%;
   height: 60px;

@@ -65,6 +65,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+@import '../../assets/index.scss';
 .box-card {
   width: 75%;
   margin: 0 auto;
@@ -102,7 +103,7 @@ export default {
       /deep/ .el-button {
         width: 100%;
         margin: 20px 0 30px 0;
-        background: #f56c6c;
+        background: $primary-color;
         color: #fff;
         border: none;
       }

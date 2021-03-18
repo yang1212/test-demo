@@ -6,7 +6,6 @@ import echarts from 'echarts'
 import App from './App'
 import router from './router'
 import store from './store/index'
-// import '@common/style/common.scss'
 
 Vue.use(elementUI, {
   size: 'medium'// set element-ui default size
