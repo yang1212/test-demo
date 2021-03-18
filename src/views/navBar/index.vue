@@ -15,7 +15,7 @@
       destroy-on-close
       :visible.sync="showAddPanel">
       <add-new @close="closePanel"></add-new>
-    </el-drawer>  
+    </el-drawer>
     <!-- <el-dialog title="新增" width="80%" v-if="showAddPanel"  :visible.sync="showAddPanel" append-to-body>
       <add-new @close="closePanel"></add-new>
     </el-dialog> -->

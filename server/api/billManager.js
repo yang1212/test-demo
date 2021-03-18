@@ -58,12 +58,13 @@ router.post('/typeData', function (req, res) {
 })
 
 router.post('/createBill', function (req, res) {
-  const { objName, objType, objPrice, objDate } = req.body
+  const { objName, objType, objPrice, objDate, userId } = req.body
   const tempData = new BillDetail({
     objName,
     objType,
     objPrice,
-    objDate
+    objDate,
+    userId
   })
   tempData.save().then(data => {
     responseClient(res, 200, 200, '请求成功', data)
@@ -73,23 +74,12 @@ router.post('/createBill', function (req, res) {
 })
 
 router.post('/billDetailList', function (req, res) { // 根据类型过滤出对应的数据
-  const { objType } = req.body
-  if (objType) {
-    BillDetail.find({ objType: objType }).then(data => {
-      responseClient(res, 200, 200, '请求成功', data)
-    }).catch(err => {
-      responseClient(res)
-    })
-  } else {
-    BillDetail.find().then(data => {
-      BillType.find().then(typeData => {
-        const tempData = handlBillDeatailList(data, typeData)
-        responseClient(res, 200, 200, '请求成功', tempData)
-      })
-    }).catch(err => {
-      responseClient(res)
-    })
-  }
+  const { userId } = req.body
+  BillDetail.find({ userId: userId }).then(data => {
+    responseClient(res, 200, 200, '请求成功', data)
+  }).catch(err => {
+    responseClient(res)
+  })
 })
 
 router.post('/delListData', (req, res) => {

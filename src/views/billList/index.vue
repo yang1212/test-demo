@@ -45,7 +45,7 @@ export default {
       'updateDetailList'
     ]),
     getDetailList () {
-      billDetailList().then(res => {
+      billDetailList({ userId: JSON.parse(localStorage.getItem('userId'))}).then(res => {
         this.updateDetailList(res.data)
       })
     },

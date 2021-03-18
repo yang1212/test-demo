@@ -49,6 +49,7 @@ export default {
           this.$message.error('请输入正确的用户名和密码进行登录')
           return true
         } else {
+          localStorage.setItem('userId', JSON.stringify(res.data[0]._id))
           this.$router.push({
             path: 'billManager'
           })

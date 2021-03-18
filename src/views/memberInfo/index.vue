@@ -1,7 +1,7 @@
 <template>
   <div class="member-box">
     <div>useName</div>
-    <div>login out</div>  
+    <div>login out</div>
   </div>
 </template>
 

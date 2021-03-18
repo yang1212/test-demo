@@ -64,6 +64,7 @@ export default {
         this.$message.error('存在数据未填写')
       } else {
         this.$emit('close')
+        this.formData.userId = JSON.parse(localStorage.getItem('userId'))
         createBill(this.formData).then(res => {
           billDetailList().then(res => {
             this.updateDetailList(res.data)

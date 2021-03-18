@@ -5,5 +5,6 @@ module.exports = new mongoose.Schema({
     objName: String,
     objType: String,
     objPrice: String,
-    objDate: String
+    objDate: String,
+    userId: String
 });
