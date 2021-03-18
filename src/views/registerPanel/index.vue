@@ -6,10 +6,10 @@
         <el-input v-model="formData.objName" placeholder="用户名"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-input v-model="formData.password" placeholder="密码"></el-input>
+        <el-input v-model="formData.password" placeholder="密码" type="password"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-input v-model="formData.confirmPassword" placeholder="确认密码"></el-input>
+        <el-input v-model="formData.confirmPassword" placeholder="确认密码" type="password"></el-input>
       </el-form-item>
       <el-form-item class="confirm-btn">
         <el-button @click="confirmBtn" size="small">确认</el-button>
@@ -50,6 +50,7 @@ export default {
         if (res.resultCode === 403) {
           this.$message.error(res.message)
         } else {
+          localStorage.setItem('userId', JSON.stringify(res.data._id))
           this.$router.push({
             path: 'billManager'
           })
