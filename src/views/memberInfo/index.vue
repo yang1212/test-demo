@@ -1,7 +1,7 @@
 <template>
   <div class="member-box">
     <div>useName</div>
-    <div>login out</div>
+    <el-button @click="loginOut">login out</el-button>
   </div>
 </template>
 
@@ -15,6 +15,12 @@ export default {
     }
   },
   methods: {
+    loginOut () {
+      localStorage.removeItem('userId')
+      this.$router.push({
+        path: '/login'
+      })
+    }
   }
 }
 </script>

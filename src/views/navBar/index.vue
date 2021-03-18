@@ -2,7 +2,8 @@
   <div class="nav-box">
     <div class="home-tag" @click="chooseLogo"><el-avatar size="small" src="https://d36jcksde1wxzq.cloudfront.net/saas-mega/whiteFingerprint.png"></el-avatar></div>
     <div class="nav-list">
-      <i class="el-icon-pie-chart" @click="handleSelect"></i>
+      <i class="el-icon-pie-chart" @click="handleMember"></i>
+       <i class="el-icon-pie-chart" @click="handleSelect"></i>
       <i class="el-icon-plus" @click="addBtn"></i>
     </div>
     <el-drawer
@@ -44,6 +45,11 @@ export default {
     handleSelect () {
       this.$router.push({
         path: 'countData'
+      })
+    },
+    handleMember () {
+      this.$router.push({
+        path: 'memberInfo'
       })
     },
     addBtn () {
