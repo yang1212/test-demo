@@ -1,6 +1,6 @@
 <template>
   <div class="box-card">
-    <div class="login-text"><span>Register</span></div>
+    <div class="login-text"><span>Login</span></div>
     <el-form :model="formData" class="form-box">
       <el-form-item>
         <el-input v-model="formData.objName" placeholder="用户名"></el-input>
@@ -8,54 +8,56 @@
       <el-form-item>
         <el-input v-model="formData.password" placeholder="密码" type="password"></el-input>
       </el-form-item>
-      <el-form-item>
-        <el-input v-model="formData.confirmPassword" placeholder="确认密码" type="password"></el-input>
+      <el-form-item class="login-btn">
+        <el-button  @click="onLogin">登录</el-button>
       </el-form-item>
-      <el-form-item class="confirm-btn">
-        <el-button @click="confirmBtn" size="small">确认</el-button>
-      </el-form-item>
+      <p class="text-btn">
+        <span @click="onRegister" class="common-text">立即注册</span>
+        <span @click="onForgot" class="common-text">忘记密码</span>
+      </p>
     </el-form>
   </div>
 </template>
 
 <script>
-import { register } from '@server/index'
+import { login } from '@server/index'
 
 export default {
-  name: 'register',
+  name: 'login',
   data () {
     return {
+      msg: '',
       formData: {
         objName: '',
-        password: '',
-        confirmPassword: ''
+        password: ''
       }
     }
   },
   methods: {
-    confirmBtn () {
-      if (!this.formData.objName) {
-        this.$message.error('用户名不能为空')
-        return
+    onLogin () {
+      if (!this.formData.objName || !this.formData.password) {
+        this.$message.error('请输入用户名和密码进行登录')
+        return true
       }
-      if (!this.formData.password) {
-        this.$message.error('请设置密码')
-        return
-      }
-      if (this.formData.password !== this.formData.confirmPassword) {
-        this.$message.error('密码确认不一致')
-        return
-      }
-      register({ objName: this.formData.objName, password: this.formData.password }).then(res => {
-        if (res.resultCode === 403) {
-          this.$message.error(res.message)
+      login(this.formData).then(res => {
+        if (res.data.length === 0) {
+          this.$message.error('请输入正确的用户名和密码进行登录')
+          return true
         } else {
-          localStorage.setItem('userId', JSON.stringify(res.data._id))
+          localStorage.setItem('userId', JSON.stringify(res.data[0]._id))
           this.$router.push({
             path: 'billManager'
           })
         }
       })
+    },
+    onRegister () {
+      this.$router.push({
+        path: 'register'
+      })
+    },
+    onForgot () {
+      console.log(2)
     }
   }
 }
@@ -64,10 +66,10 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .box-card {
-  position: relative;
-  top: 100px;
   width: 75%;
   margin: 0 auto;
+  position: relative;
+  top: 100px;
   .login-text {
     width: 50px;
     border-bottom: 5px solid #fff;
@@ -87,10 +89,19 @@ export default {
       border-radius: 0;
       color: #fff;
     }
-    .confirm-btn {
+    .text-btn {
+      font-size: 14px;
+      color: #929090;
+      span:first-child {
+      }
+      span:last-child {
+        float: right;
+      }
+    }
+    .login-btn {
       /deep/ .el-button {
         width: 100%;
-        margin-top: 20px;
+        margin: 20px 0 30px 0;
         background: #f56c6c;
         color: #fff;
         border: none;

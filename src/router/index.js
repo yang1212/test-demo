@@ -9,13 +9,20 @@ export default new Router({
     {
       path: '',
       name: 'index',
-      // redirect: 'blogManager/home',
-      component: () => import(/* webpackChunkName: 'login' */ '../views/index')
-    },
-    {
-      path: '/register',
-      name: 'register',
-      component: () => import(/* webpackChunkName: 'register' */ '../views/registerPanel/index')
+      redirect: 'login',
+      component: () => import(/* webpackChunkName: 'login' */ '../views/index'),
+      children: [
+        {
+          path: 'login',
+          name: 'login',
+          component: () => import(/* webpackChunkName: 'register' */ '../views/loginPanel/index')
+        },
+        {
+          path: 'register',
+          name: 'register',
+          component: () => import(/* webpackChunkName: 'register' */ '../views/registerPanel/index')
+        }
+      ]
     },
     {
       path: '/billManager',
