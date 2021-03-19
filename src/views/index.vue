@@ -13,6 +13,14 @@ export default {
     return {
     }
   },
+  created() {
+    const userId = JSON.parse(localStorage.getItem('userId'))
+    if (userId) {
+      this.$router.push({
+        path: '/billManager'
+      })
+    }
+  },
   methods: {
   }
 }

@@ -12,8 +12,7 @@
         <el-button  @click="onLogin" :loading="loading">登录</el-button>
       </el-form-item>
       <p class="text-btn">
-        <span @click="onRegister" class="common-text">立即注册</span>
-        <span @click="onForgot" class="common-text">忘记密码</span>
+        还未注册账号？<span @click="onRegister" class="common-text">立即注册</span>
       </p>
     </el-form>
   </div>
@@ -57,9 +56,6 @@ export default {
       this.$router.push({
         path: 'register'
       })
-    },
-    onForgot () {
-      console.log(2)
     }
   }
 }
@@ -95,11 +91,7 @@ export default {
     .text-btn {
       font-size: 14px;
       color: #929090;
-      span:first-child {
-      }
-      span:last-child {
-        float: right;
-      }
+      float: right;
     }
     .login-btn {
       /deep/ .el-button {
