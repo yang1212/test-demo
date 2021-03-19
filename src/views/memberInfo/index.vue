@@ -1,10 +1,13 @@
 <template>
   <div class="member-box">
     <div class="member-info">
-      <el-avatar size="small" src="https://d36jcksde1wxzq.cloudfront.net/saas-mega/whiteFingerprint.png"></el-avatar>
+      <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" class="info-logo"></el-avatar>
     </div>
     <div class="login-out" @click="loginOut">
-      Login out
+      <i class="el-icon-s-promotion"></i>&nbsp;Login out
+    </div>
+    <div class="login-out">
+      <i class="el-icon-s-cooperation"></i>&nbsp;temp Data
     </div>
   </div>
 </template>
@@ -33,14 +36,21 @@ export default {
 <style scoped lang="scss">
 .member-box {
   .member-info {
-    height: 200px;
-    line-height: 200px;
+    height: 260px;
     text-align: center;
-    border-bottom: 1px solid #eee;
+    background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
+    margin-top: -80px;
+    .info-logo {
+      margin-top: 130px;
+    }
   }
   .login-out {
-    height: 100px;
-    border-bottom: 1px solid #eee;
+    height: 60px;
+    line-height: 60px;
+    background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
+    color: gray;
+    font-weight: bold;
+    padding-left: 20px;
   }
 }
 </style>

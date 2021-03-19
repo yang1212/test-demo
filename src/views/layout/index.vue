@@ -11,6 +11,16 @@
         <span style="display: block;color:#939393">湘ICP备2021002848号-1</span>
       </div>
     </div>
+    <el-dialog title="温馨提示"
+      :show-close="false"
+      :close-on-click-modal="false"
+      width="80%"
+      :visible.sync="showGoLoginPanel">
+      <span>请重新登录</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button  @click="goLoginPage">去登录</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -24,9 +34,22 @@ export default {
   },
   data () {
     return {
+      showGoLoginPanel: false
+    }
+  },
+  created() {
+    const userId = JSON.parse(localStorage.getItem('userId'))
+    if (!userId) {
+      this.showGoLoginPanel = true
     }
   },
   methods: {
+    goLoginPage() {
+      this.$router.push({
+        path: '/login'
+      })
+      this.showGoLoginPanel = false
+    }
   }
 }
 </script>
