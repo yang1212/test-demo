@@ -12,7 +12,7 @@
         <el-input v-model="formData.confirmPassword" placeholder="确认密码" type="password"></el-input>
       </el-form-item>
       <el-form-item class="confirm-btn">
-        <el-button @click="confirmBtn" size="small">确认</el-button>
+        <el-button @click="confirmBtn" size="small" :loading="loading">确认</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -29,7 +29,8 @@ export default {
         objName: '',
         password: '',
         confirmPassword: ''
-      }
+      },
+      loading: false
     }
   },
   methods: {
@@ -46,7 +47,9 @@ export default {
         this.$message.error('密码确认不一致')
         return
       }
+      this.loading = true
       register({ objName: this.formData.objName, password: this.formData.password }).then(res => {
+        this.loading = false
         if (res.resultCode === 403) {
           this.$message.error(res.message)
         } else {

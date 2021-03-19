@@ -93,8 +93,8 @@ router.post('/delListData', (req, res) => {
 
 // forTimeCount
 router.post('/forTimeCount', function (req, res) { // 根据时间区间得到数据，并累加
-  const { startDate, endDate } = req.body
-  BillDetail.find({ objDate: {$lte:endDate, $gte:startDate} }).then(data => {
+  const { startDate, endDate, userId } = req.body
+  BillDetail.find({ objDate: {$lte:endDate, $gte:startDate}, userId: userId }).then(data => {
     BillType.find().then(typeData => {
       const tempData = handleCountData(data, typeData)
       responseClient(res, 200, 200, '请求成功', tempData)
@@ -105,8 +105,8 @@ router.post('/forTimeCount', function (req, res) { // 根据时间区间得到�
 })
 
 router.post('/forYearCount', function(req, res) { // 根据年份计算每个类型每个月份的值
-  const { startDate, endDate } = req.body
-  BillDetail.find({ objDate: {$lte:endDate, $gte:startDate} }).then(data => {
+  const { startDate, endDate, userId } = req.body
+  BillDetail.find({ objDate: {$lte:endDate, $gte:startDate}, userId: userId }).then(data => {
     BillType.find().then(typeData => {
       let tempData = {
         total: []

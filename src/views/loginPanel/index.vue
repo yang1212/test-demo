@@ -9,7 +9,7 @@
         <el-input v-model="formData.password" placeholder="密码" type="password"></el-input>
       </el-form-item>
       <el-form-item class="login-btn">
-        <el-button  @click="onLogin">登录</el-button>
+        <el-button  @click="onLogin" :loading="loading">登录</el-button>
       </el-form-item>
       <p class="text-btn">
         <span @click="onRegister" class="common-text">立即注册</span>
@@ -26,7 +26,7 @@ export default {
   name: 'login',
   data () {
     return {
-      msg: '',
+      loading: false,
       formData: {
         objName: '',
         password: ''
@@ -39,7 +39,9 @@ export default {
         this.$message.error('请输入用户名和密码进行登录')
         return true
       }
+      this.loading = true
       login(this.formData).then(res => {
+        this.loading = false
         if (res.data.length === 0) {
           this.$message.error('请输入正确的用户名和密码进行登录')
           return true

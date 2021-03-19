@@ -206,13 +206,13 @@ export default {
     handleYearChange (year) {
       const startDate = this.format(new Date(year))
       const endDate = startDate.slice(0, 4) + '-12-31'
-      forYearCount({startDate: startDate, endDate: endDate}).then(res => {
+      forYearCount({startDate: startDate, endDate: endDate, userId: JSON.parse(localStorage.getItem('userId'))}).then(res => {
         this.lineChartData = res.data
         this.initLineChart()
       })
     },
     getCountData (tag) {
-      forTimeCount({ startDate: this.formData.startDate, endDate: this.formData.endDate }).then(res => {
+      forTimeCount({ startDate: this.formData.startDate, endDate: this.formData.endDate, userId: JSON.parse(localStorage.getItem('userId')) }).then(res => {
         this.chartData = res.data
         if (tag) {
           this.initChart(this.chartData)

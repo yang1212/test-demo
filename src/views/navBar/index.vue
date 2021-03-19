@@ -2,9 +2,16 @@
   <div class="nav-box">
     <div class="home-tag" @click="chooseLogo"><el-avatar size="small" src="https://d36jcksde1wxzq.cloudfront.net/saas-mega/whiteFingerprint.png"></el-avatar></div>
     <div class="nav-list">
-      <i class="el-icon-pie-chart" @click="handleMember"></i>
-      <i class="el-icon-pie-chart" @click="handleSelect"></i>
-      <i class="el-icon-plus" @click="addBtn"></i>
+      <el-dropdown trigger="click">
+        <span class="el-dropdown-link">
+          <i class="el-icon-more"></i>
+        </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item  @click.native="handeAdd"><i class="el-icon-circle-plus-outline"></i>&nbsp;新增数据</el-dropdown-item>
+          <el-dropdown-item  @click.native="handleChart"><i class="el-icon-pie-chart"></i>&nbsp;图表分析</el-dropdown-item>
+          <el-dropdown-item  @click.native="handleMember"><i class="el-icon-s-home"></i>&nbsp;个人信息</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
     </div>
     <el-drawer
       title="新增"
@@ -17,9 +24,6 @@
       :visible.sync="showAddPanel">
       <add-new @close="closePanel"></add-new>
     </el-drawer>
-    <!-- <el-dialog title="新增" width="80%" v-if="showAddPanel"  :visible.sync="showAddPanel" append-to-body>
-      <add-new @close="closePanel"></add-new>
-    </el-dialog> -->
   </div>
 </template>
 
@@ -42,7 +46,10 @@ export default {
         path: '/billManager'
       })
     },
-    handleSelect () {
+    handeAdd () {
+      this.showAddPanel = true
+    },
+    handleChart () {
       this.$router.push({
         path: 'countData'
       })
@@ -51,9 +58,6 @@ export default {
       this.$router.push({
         path: 'memberInfo'
       })
-    },
-    addBtn () {
-      this.showAddPanel = true
     },
     closePanel () {
       this.showAddPanel = false
