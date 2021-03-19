@@ -6,7 +6,17 @@
           <el-card>
             <h4>{{item.objLabel}} ({{item.objType}})</h4>
             <p>{{item.objName}}支出: {{item.objPrice}}元</p>
-            <span class="delete-btn" @click="handleDelete(item)"><i class="el-icon-delete"></i></span>
+            <el-popover
+              placement="top"
+              width="160"
+              v-model="visible">
+              <p>确定删除吗？</p>
+              <div style="text-align: right; margin: 0">
+                <el-button size="mini" type="text" @click="visible = false">取消</el-button>
+                <el-button size="mini" type="text" @click="handleDelete(item)" >确定</el-button>
+              </div>
+              <span class="delete-btn" slot="reference"><i class="el-icon-delete"></i></span>
+            </el-popover>
           </el-card>
         </el-timeline-item>
         <el-timeline-item  placement="top" v-show="detailList.length === 0">
@@ -29,6 +39,7 @@ export default {
   },
   data () {
     return {
+      visible: false,
       curDate: new Date()
     }
   },
@@ -55,7 +66,8 @@ export default {
       })
     },
     handleDelete (data) {
-      delListData({id: data.id}).then(res => {
+      delListData({id: data._id}).then(res => {
+        this.visible = false
         this.$message.success('删除成功')
         this.getDetailList()
       })

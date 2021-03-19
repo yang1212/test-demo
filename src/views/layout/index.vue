@@ -37,14 +37,14 @@ export default {
       showGoLoginPanel: false
     }
   },
-  created() {
+  created () {
     const userId = JSON.parse(localStorage.getItem('userId'))
     if (!userId) {
       this.showGoLoginPanel = true
     }
   },
   methods: {
-    goLoginPage() {
+    goLoginPage () {
       this.$router.push({
         path: '/login'
       })
