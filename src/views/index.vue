@@ -13,7 +13,7 @@ export default {
     return {
     }
   },
-  created() {
+  created () {
     const userId = JSON.parse(localStorage.getItem('userId'))
     if (userId) {
       this.$router.push({

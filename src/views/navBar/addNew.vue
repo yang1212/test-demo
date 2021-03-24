@@ -64,10 +64,10 @@ export default {
         this.$message.error('存在数据未填写')
       } else {
         this.$emit('close')
-        const useId = JSON.parse(localStorage.getItem('userId'))
-        this.formData.userId = useId
+        const userId = JSON.parse(localStorage.getItem('userId'))
+        this.formData.userId = userId
         createBill(this.formData).then(res => {
-          billDetailList({useId: useId}).then(res => {
+          billDetailList({userId: userId}).then(res => {
             this.updateDetailList(res.data)
           })
           this.$router.push({
