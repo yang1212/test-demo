@@ -36,6 +36,15 @@ router.post('/register', function(req, res) {
   })
 })
 
+router.post('/getMemberInfo', function(req, res) {
+  const { id } = req.body
+  Register.find({'_id': id}).then(data => {
+    responseClient(res, 200, 200, '请求成功', data)
+  }).catch(err => {
+    responseClient(res)
+  })
+})
+
 router.post('/initTypeList', function (req, res) { // 初始化类型，可通过postman，无需写这个接口
   const { code, label } = req.body
   const tempData = new BillType({

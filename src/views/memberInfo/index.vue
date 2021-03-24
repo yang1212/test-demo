@@ -3,23 +3,28 @@
     <div class="member-info">
       <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" class="info-logo"></el-avatar>
     </div>
+    <div class="login-out">
+      <i class="el-icon-edit-outline"></i>&nbsp;Edit info
+    </div>
     <div class="login-out" @click="loginOut">
       <i class="el-icon-s-promotion"></i>&nbsp;Login out
-    </div>
-    <div class="login-out">
-      <i class="el-icon-s-cooperation"></i>&nbsp;temp Data
     </div>
   </div>
 </template>
 
 <script>
-// import { mapActions } from 'vuex'
+import { getMemberInfo } from '@server/index'
 
 export default {
   name: 'memberInfo',
   data () {
     return {
     }
+  },
+  created() {
+    getMemberInfo({id: JSON.parse(localStorage.getItem('userId'))}).then(res => {
+      console.log(2, res)
+    })
   },
   methods: {
     loginOut () {

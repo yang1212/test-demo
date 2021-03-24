@@ -11,6 +11,17 @@ export function register (params) {
   })
 }
 
+export function getMemberInfo (params) {
+  let url = '/billType/getMemberInfo'
+  return new Promise((resolve, reject) => {
+    post(url, params).then((res) => {
+      resolve(res)
+    }).catch((data) => {
+      reject(data)
+    })
+  })
+}
+
 export function login (params) {
   let url = '/billType/login'
   return new Promise((resolve, reject) => {
