@@ -26,3 +26,11 @@ export function handlBillDeatailList (orginData, typeData) {
   })
   return tempData
 }
+
+export function handleMemberInfo(data, name) {
+  let tempData = []
+  data.forEach((item) => {
+    tempData.push({userId: item.userId, imgPath: item.imgPath, userName: name}) // 在原有基础上添加userName属性无法加入，需通过push重组数据
+  })
+  return tempData
+}
