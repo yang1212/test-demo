@@ -1,10 +1,11 @@
 import Express from 'express'
 import { responseClient } from '../utils'
-import { handleCountData, handleMemberInfo } from '../index'
+import { handleCountData } from '../index'
 import BillType from '../../models/billTypeEnum'
 import BillDetail from '../../models/billDetail'
 import Register from '../../models/register'
 import MemberInfo from '../../models/memberInfo'
+import { register } from '../../src/server'
 
 const router = Express.Router()
 
@@ -51,6 +52,14 @@ router.post('/getMemberInfo', function(req, res) {
     responseClient(res)
   })
 })
+
+function handleMemberInfo(data, name) {
+  let tempData = []
+  data.forEach((item) => {
+    tempData.push({userId: item.userId, imgPath: item.imgPath, userName: name}) // 在原有基础上添加userName属性无法加入，需通过push重组数据
+  })
+  return tempData
+}
 
 router.post('/initTypeList', function (req, res) { // 初始化类型，可通过postman，无需写这个接口
   const { code, label } = req.body
