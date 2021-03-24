@@ -72,6 +72,8 @@ export default {
     margin-top: -80px;
     .member-avatar-default {
       margin-top: 120px;
+      width: 60px;
+      height: 60px;
     }
     .member-avatar {
       margin-top: 120px;
