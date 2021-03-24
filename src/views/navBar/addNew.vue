@@ -26,7 +26,7 @@
       </el-form-item>
       <el-form-item class="btn-group">
         <el-button  @click="onCancel">取消</el-button>
-        <el-button  @click="onSubmit">确认</el-button>
+        <el-button  @click="onSubmit" :loading="loading">确认</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -46,7 +46,8 @@ export default {
         objPrice: '',
         objDate: ''
       },
-      obyTypeEnum: []
+      obyTypeEnum: [],
+      loading: false
     }
   },
   created () {
@@ -63,15 +64,17 @@ export default {
       if (!this.formData.objName || !this.formData.objType || !this.formData.objPrice || !this.formData.objDate) {
         this.$message.error('存在数据未填写')
       } else {
-        this.$emit('close')
+        this.loading = true
         const userId = JSON.parse(localStorage.getItem('userId'))
         this.formData.userId = userId
         createBill(this.formData).then(res => {
           billDetailList({userId: userId}).then(res => {
+            this.loading = false
+            this.$emit('close')
             this.updateDetailList(res.data)
-          })
-          this.$router.push({
-            path: '/billManager'
+            this.$router.push({
+              path: '/billManager'
+            })
           })
         })
       }
