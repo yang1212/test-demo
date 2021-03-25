@@ -1,12 +1,16 @@
 <template>
   <div class="box-card">
-    <div class="login-text"><span>Login</span></div>
+    <!-- <div class="login-text"><span>Login</span></div> -->
+    <div class="login-text">
+      <span v-show="showDefaultImg" class="el-icon-s-promotion" :class="{'img-rotate': showRotate}"></span>
+      <span v-show="!showDefaultImg" class="el-icon-s-opportunity"></span>
+    </div>
     <el-form :model="formData" class="form-box">
       <el-form-item>
-        <el-input v-model="formData.objName" placeholder="用户名"></el-input>
+        <el-input v-model="formData.objName" placeholder="用户名" @input="changeObjName" @blur="blurObjName"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-input v-model="formData.password" placeholder="密码" type="password"></el-input>
+        <el-input v-model="formData.password" placeholder="密码" type="password" @focus="focusPassword" @blur="blurPassword"></el-input>
       </el-form-item>
       <el-form-item class="login-btn">
         <el-button  @click="onLogin" :loading="loading">登录</el-button>
@@ -29,7 +33,9 @@ export default {
       formData: {
         objName: '',
         password: ''
-      }
+      },
+      showDefaultImg: true,
+      showRotate: false
     }
   },
   methods: {
@@ -56,6 +62,18 @@ export default {
       this.$router.push({
         path: 'register'
       })
+    },
+    focusPassword () {
+      this.showDefaultImg = false
+    },
+    blurPassword () {
+      this.showDefaultImg = true
+    },
+    changeObjName () {
+      this.showRotate = true
+    },
+    blurObjName () {
+      this.showRotate = false
     }
   }
 }
@@ -102,6 +120,12 @@ export default {
         border: none;
       }
     }
+  }
+  .img-rotate {
+    -webkit-transform:rotate(40deg);
+    transform:rotate(40deg);
+    -webkit-transition:-webkit-transform 1s linear;
+    transition:transform 1s linear;
   }
 }
 </style>
