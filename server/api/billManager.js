@@ -5,7 +5,6 @@ import BillType from '../../models/billTypeEnum'
 import BillDetail from '../../models/billDetail'
 import Register from '../../models/register'
 import MemberInfo from '../../models/memberInfo'
-import { register } from '../../src/server'
 
 const router = Express.Router()
 

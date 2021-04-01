@@ -8,14 +8,10 @@
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "serve": "nodemon --watch server/api server/api/index.js",
     "lint": "eslint --ext .js,.vue src",
-    "build": "node build/build.js"
+    "build": "cross-env NODE_ENV=production node build/build.js"
   },
   "dependencies": {
     "@antv/f2": "^3.8.3",
-    "@toast-ui/editor": "^2.2.0",
-    "@toast-ui/editor-plugin-chart": "^1.0.0",
-    "@toast-ui/editor-plugin-code-syntax-highlight": "^1.0.0",
-    "@toast-ui/editor-plugin-color-syntax": "^1.0.0",
     "axios": "0.17.1",
     "bluebird": "^3.5.0",
     "body-parser": "^1.18.0",
@@ -48,6 +44,7 @@
     "babel-plugin-transform-vue-jsx": "^3.5.0",
     "chalk": "^2.0.1",
     "copy-webpack-plugin": "^4.0.1",
+    "cross-env": "^5.1.0",
     "css-loader": "^0.28.0",
     "eslint": "^4.15.0",
     "eslint-config-standard": "^10.2.1",

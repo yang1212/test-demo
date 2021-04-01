@@ -31,7 +31,7 @@ export default {
 .container-box {
   width: 100%;
   height: 100%;
-  background: url("../../static/loginBg.png");
+  background: url("../assets/images/loginBg.png");
 }
 .masklayer {
   position: fixed;
