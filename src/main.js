@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import 'normalize.css/normalize.css'// A modern alternative to CSS resets
-import { Button, Dialog, Dropdown, DropdownItem, Input, Select, Form, Timeline, TimelineItem, Card, Upload, DatePicker } from 'element-ui'
+import { Button, Dialog, Dropdown, DropdownItem, Input, Select, Form, Timeline, TimelineItem, Card, Upload, DatePicker, FormItem } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 // 按需引入echarts
 import echarts from 'echarts/lib/echarts'
@@ -13,7 +13,7 @@ import App from './App'
 import router from './router'
 import store from './store/index'
 
-const eleEnum = [Button, Dialog, Dropdown, DropdownItem, Input, Select, Form, Timeline, TimelineItem, Card, Upload, DatePicker]
+const eleEnum = [Button, Dialog, Dropdown, DropdownItem, Input, Select, Form, Timeline, TimelineItem, Card, Upload, DatePicker, FormItem]
 eleEnum.forEach((item) => {
   Vue.use(item)
 })
