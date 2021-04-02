@@ -11,7 +11,14 @@
     const plugins = [
       "babel-plugin-transform-vue-jsx",
       "@babel/plugin-syntax-dynamic-import",
-      "@babel/plugin-transform-runtime"
+      "@babel/plugin-transform-runtime",
+      [
+        "component",
+        {
+          "libraryName": "element-ui",
+          "styleLibraryName": "theme-chalk"
+        }
+      ]
     ];
     return {
       presets,

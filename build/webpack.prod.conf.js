@@ -90,11 +90,11 @@ const webpackConfig = merge(baseWebpackConfig, {
       cacheGroups: {
         vendors: {
           test: /[\\/]node_modules[\\/]/,
-          priority: -10
+          priority: 1
         },
         default: {
           minChunks: 2,
-          priority: -20,
+          priority: 2,
           reuseExistingChunk: true
         }
       }
