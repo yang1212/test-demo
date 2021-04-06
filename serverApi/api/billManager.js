@@ -1,10 +1,10 @@
 import Express from 'express'
-import { responseClient } from '../utils'
-import { handleCountData } from '../index'
-import BillType from '../../models/billTypeEnum'
-import BillDetail from '../../models/billDetail'
-import Register from '../../models/register'
-import MemberInfo from '../../models/memberInfo'
+import { responseClient } from './common/utils'
+import { handleCountData } from './common/index'
+import BillType from '../models/billTypeEnum'
+import BillDetail from '../models/billDetail'
+import Register from '../models/register'
+import MemberInfo from '../models/memberInfo'
 
 const router = Express.Router()
 

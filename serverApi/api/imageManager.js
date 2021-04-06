@@ -1,6 +1,6 @@
 import Express from 'express'
-import { responseClient } from '../utils'
-import MemberInfo from '../../models/MemberInfo'
+import { responseClient } from './common/utils'
+import MemberInfo from '../models/MemberInfo'
 const router = Express.Router()
 const path = require('path')
 const fs = require('fs')
