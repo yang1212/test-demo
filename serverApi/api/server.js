@@ -1,7 +1,7 @@
 import Express from 'express'
 import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
-import config from '../../config/index'
+import config from '../config/index'
 
 const port = config.apiPort
 const app = new Express()
