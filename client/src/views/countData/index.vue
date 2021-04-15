@@ -7,20 +7,15 @@
       </el-form>
     </el-row>
     <el-card class="box-card">
-      <div slot="header" class="clearfix">
-        <span>柱状图</span>
-      </div>
-      <div class="text item">
-        <canvas id="myChart" width="300" height="260"></canvas>
-      </div>
+      <div id="myChart" style="width:100%; height:300px"></div>
     </el-card>
     <el-card class="box-card">
-      <div slot="header" class="clearfix">
+      <!-- <div slot="header" class="clearfix">
         <span>饼图</span>
       </div>
       <div class="text item">
         <canvas id="pieChart" width="300" height="300"></canvas>
-      </div>
+      </div> -->
     </el-card>
     <el-card class="box-card">
       <div slot="header" class="clearfix">
@@ -41,11 +36,8 @@
 </template>
 
 <script>
-import F2 from '@antv/f2/lib/index-all'
 import Rolldate from 'rolldate'
 import { forTimeCount, forYearCount } from '@server/index'
-let chart = null
-let pieChart = null
 
 export default {
   name: 'countData',
@@ -71,64 +63,30 @@ export default {
     this.initDate('init')
   },
   methods: {
-    initChart () {
-      // F2 对数据源格式的要求，仅仅是 JSON 数组，数组的每个元素是一个标准 JSON 对象。
-      // Step 1: 创建 Chart 对象
-      chart = new F2.Chart({
-        id: 'myChart',
-        pixelRatio: window.devicePixelRatio // 指定分辨率
-      })
-
-      // Step 2: 载入数据源
-      chart.source(this.chartData)
-
-      // Step 3：创建图形语法，绘制柱状图，由 genre 和 sold 两个属性决定图形位置，genre 映射至 x 轴，sold 映射至 y 轴
-      chart.interval().position('label*value').color('label')
-
-      // Step 4: 渲染图表
-      chart.render()
-    },
-    initPieChart (value) {
-      pieChart = new F2.Chart({
-        id: 'pieChart',
-        pixelRatio: window.devicePixelRatio
-      })
-      pieChart.source(value)
-      pieChart.coord('polar', {
-        transposed: true,
-        radius: 0.9,
-        innerRadius: 0.5
-      })
-      pieChart.axis(false)
-      pieChart.legend(false)
-      pieChart.tooltip(false)
-      pieChart.guide()
-        .html({
-          position: [ '50%', '50%' ],
-          html: '<div style="text-align: center;width:150px;height: 50px;">\n      <p style="font-size: 12px;color: #999;margin: 0" id="title"></p>\n      <p style="font-size: 18px;color: #343434;margin: 0;font-weight: bold;" id="money"></p>\n      </div>'
-        })
-      pieChart.interval()
-        .position('const*value')
-        .adjust('stack')
-        .color('type', [ '#1890FF', '#13C2C2', '#2FC25B', '#FACC14' ])
-      pieChart.pieLabel({
-        sidePadding: 30,
-        activeShape: true,
-        label1: function label1 (data) {
-          return {
-            text: '￥' + data.value,
-            fill: '#343434',
-            fontWeight: 'bold'
-          }
+    initChart (data) {
+      let myChart = this.$echarts.init(document.getElementById('myChart'))
+      let option
+      option = {
+        color: ['#003366'],
+        xAxis: {
+          type: 'category',
+          data: data.map((item) => item.label)
         },
-        label2: function label2 (data) {
-          return {
-            text: data.label,
-            fill: '#999'
+        yAxis: {
+          type: 'value'
+        },
+        series: [
+          {
+            type: 'bar',
+            barWidth: '25%',
+            data: data.map((item) => item.value)
           }
-        }
-      })
-      pieChart.render()
+        ]
+      }
+      option && myChart.setOption(option)
+    },
+    initPieChart () {
+      // #1890FF', '#13C2C2', '#2FC25B', '#FACC14'
     },
     initLineChart () {
       let myChart = this.$echarts.init(document.getElementById('lineChart'))
@@ -140,6 +98,13 @@ export default {
         legend: {
           data: ['综合', '生活', '饮食', '服饰']
         },
+        dataZoom: [
+          {
+            type: 'inside', // 这个 dataZoom 组件是 slider 型 dataZoom 组件
+            start: 0, // 左边在 10% 的位置。
+            end: 40
+          }
+        ],
         grid: {
           left: '3%',
           right: '4%',
@@ -148,8 +113,9 @@ export default {
         },
         xAxis: {
           type: 'category',
+          data: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
           boundaryGap: false,
-          data: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
+          max: 11
         },
         yAxis: {
           type: 'value'
@@ -214,13 +180,12 @@ export default {
     getCountData (tag) {
       forTimeCount({ startDate: this.formData.startDate, endDate: this.formData.endDate, userId: JSON.parse(localStorage.getItem('userId')) }).then(res => {
         this.chartData = res.data
-        if (tag) {
-          this.initChart(this.chartData)
-          this.initPieChart(this.filterData(this.chartData))
-        } else {
-          chart.changeData(this.chartData) // 更新图表数据
-          pieChart.changeData(this.filterData(this.chartData)) // 更新图表数据
-        }
+        this.initChart(this.chartData) // 更新柱状图表数据
+        // if (tag) {
+        //   this.initPieChart(this.filterData(this.chartData))
+        // } else {
+        //   pieChart.changeData(this.filterData(this.chartData)) // 更新图表数据
+        // }
       })
     },
     filterData (value) {
