@@ -1,3 +1,4 @@
+import '@babel/polyfill'
 import Vue from 'vue'
 import 'normalize.css/normalize.css'// A modern alternative to CSS resets
 import { Button, Dialog, Dropdown, DropdownMenu, DropdownItem, Input, Select, Form, Timeline, TimelineItem, Card, Upload, DatePicker, FormItem, Message, drawer, option, Row, Col } from 'element-ui'

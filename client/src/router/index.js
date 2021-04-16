@@ -14,12 +14,12 @@ export default new Router({
         {
           path: 'login',
           name: 'login',
-          component: () => import(/* webpackChunkName: 'register' */ '../views/loginPanel/index')
+          component: () => import(/* webpackChunkName: 'login' */ '../views/loginPanel/index')
         },
         {
           path: 'register',
           name: 'register',
-          component: () => import(/* webpackChunkName: 'register' */ '../views/registerPanel/index')
+          component: () => import(/* webpackChunkName: 'login' */ '../views/registerPanel/index')
         }
       ]
     },

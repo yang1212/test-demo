@@ -88,14 +88,23 @@ const webpackConfig = merge(baseWebpackConfig, {
       automaticNameDelimiter: '~',
       name: true,
       cacheGroups: {
-        vendors: {
-          test: /[\\/]node_modules[\\/]/,
-          priority: 1
-        },
         default: {
           minChunks: 2,
           priority: 2,
           reuseExistingChunk: true
+        },
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: 1
+        },
+        echarts: {
+          name: 'echarts',
+          priority: 3,
+          test: function(module){
+            var context = module.context;
+            return context && (context.indexOf('echarts') >= 0 || context.indexOf('zrender') >= 0)
+          },
+          chunks: 'all'
         }
       }
     }
