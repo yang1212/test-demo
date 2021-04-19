@@ -26,7 +26,7 @@
 
 <script>
 import beiAnImg from '@/assets/images/beian.png'
-import navBar from '../navBar/index'
+import navBar from '../components/navBar/index'
 
 export default {
   name: 'billManager',

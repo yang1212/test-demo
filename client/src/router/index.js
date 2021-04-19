@@ -14,12 +14,12 @@ export default new Router({
         {
           path: 'login',
           name: 'login',
-          component: () => import(/* webpackChunkName: 'login' */ '../views/loginPanel/index')
+          component: () => import(/* webpackChunkName: 'login' */ '../views/memberInfo/loginPanel/index')
         },
         {
           path: 'register',
           name: 'register',
-          component: () => import(/* webpackChunkName: 'login' */ '../views/registerPanel/index')
+          component: () => import(/* webpackChunkName: 'login' */ '../views/memberInfo/registerPanel/index')
         }
       ]
     },
@@ -32,12 +32,12 @@ export default new Router({
         {
           path: 'home',
           name: 'home',
-          component: () => import(/* webpackChunkName: 'tab1' */ '../views/billList/index')
+          component: () => import(/* webpackChunkName: 'tab1' */ '../views/listDetailPage/index')
         },
         {
-          path: 'countData',
-          name: 'countData',
-          component: () => import(/* webpackChunkName: 'tab1' */ '../views/countData/index')
+          path: 'chartData',
+          name: 'chartData',
+          component: () => import(/* webpackChunkName: 'tab1' */ '../views/chartData/index')
         },
         {
           path: 'memberInfo',

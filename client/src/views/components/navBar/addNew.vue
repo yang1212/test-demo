@@ -97,7 +97,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/index.scss';
+@import '../../../assets/index.scss';
 .add-new-box {
   padding: 20px 40px;
   .form-data {

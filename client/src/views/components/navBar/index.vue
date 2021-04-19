@@ -2,6 +2,7 @@
   <div class="nav-box">
     <div class="home-tag" @click="chooseLogo">Bill</div>
     <div class="nav-list">
+      <!-- TO DO: 交互待优化 -->
       <el-dropdown trigger="click">
         <span class="el-dropdown-link">
           <i class="el-icon-more"></i>
@@ -51,7 +52,7 @@ export default {
     },
     handleChart () {
       this.$router.push({
-        path: 'countData'
+        path: 'chartData'
       })
     },
     handleMember () {
@@ -68,7 +69,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@import '../../assets/index.scss';
+@import '../../../assets/index.scss';
 .nav-box {
   position: fixed;
   top: 0;

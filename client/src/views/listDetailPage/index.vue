@@ -60,7 +60,7 @@ export default {
     },
     goCountPage () {
       this.$router.push({
-        path: 'countData'
+        path: 'chartData'
       })
     },
     handleDelete (index) {

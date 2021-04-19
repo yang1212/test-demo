@@ -40,7 +40,7 @@ import Rolldate from 'rolldate'
 import { forTimeCount, forYearCount } from '@server/index'
 
 export default {
-  name: 'countData',
+  name: 'chartData',
   data () {
     return {
       formData: {
