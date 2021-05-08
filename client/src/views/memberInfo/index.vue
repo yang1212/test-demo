@@ -55,7 +55,7 @@ export default {
     handleMemberInfo () {
       getMemberInfo({userId: JSON.parse(localStorage.getItem('userId'))}).then(res => {
         this.imgPath = res.data[0].imgPath
-        this.userName = res.data[0].userName
+        this.userName = res.data[0].objName
       })
     }
   }

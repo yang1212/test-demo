@@ -4,7 +4,6 @@ import { handleCountData } from './common/index'
 import BillType from '../models/billTypeEnum'
 import BillDetail from '../models/billDetail'
 import Register from '../models/register'
-import MemberInfo from '../models/memberInfo'
 
 const router = Express.Router()
 
@@ -23,7 +22,8 @@ router.post('/register', function(req, res) {
     if (data.length === 0) { // 未有相同账号注册
       const tempData = new Register({
         objName,
-        password
+        password,
+        imgPath: ''
       })
       tempData.save().then(data => {
         responseClient(res, 200, 200, '请求成功', data)
@@ -40,13 +40,8 @@ router.post('/register', function(req, res) {
 
 router.post('/getMemberInfo', function(req, res) {
   const { userId } = req.body
-  Register.find({'_id': userId}).then(registerData => {
-    MemberInfo.find({'userId': userId}).then(data => {
-      const tempData = handleMemberInfo(data, registerData[0].objName)
-      responseClient(res, 200, 200, '请求成功', tempData)
-    }).catch(err => {
-      responseClient(res)
-    })
+  Register.find({'_id': userId}).then(data => {
+    responseClient(res, 200, 200, '请求成功', data)
   }).catch(err => {
     responseClient(res)
   })

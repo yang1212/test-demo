@@ -9,14 +9,14 @@
     <el-card class="box-card">
       <div id="myChart" style="width:100%; height:300px"></div>
     </el-card>
-    <el-card class="box-card">
-      <!-- <div slot="header" class="clearfix">
+    <!-- <el-card class="box-card">
+      <div slot="header" class="clearfix">
         <span>饼图</span>
       </div>
       <div class="text item">
         <canvas id="pieChart" width="300" height="300"></canvas>
-      </div> -->
-    </el-card>
+      </div>
+    </el-card> -->
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <div class="block">
