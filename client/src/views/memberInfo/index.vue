@@ -1,14 +1,13 @@
 <template>
   <div class="member-box">
     <div class="member-info">
-      <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" class="member-avatar-default" v-if="!imgPath"></el-avatar>
-      <img :src="`../../../static/${imgPath}`"  class="member-avatar" v-else />
-      <el-upload
+      <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" class="member-avatar-default"></el-avatar>
+      <!-- <el-upload
         class="upload-btn"
         :action="uploadUrl"
         :before-upload="beforeUpload">
         <span>+</span>
-      </el-upload>
+      </el-upload> -->
     </div>
     <div class="login-out">
       <i class="el-icon-edit-outline"></i>&nbsp;Hello, {{userName}}
@@ -54,7 +53,6 @@ export default {
     },
     handleMemberInfo () {
       getMemberInfo({userId: JSON.parse(localStorage.getItem('userId'))}).then(res => {
-        this.imgPath = res.data[0].imgPath
         this.userName = res.data[0].objName
       })
     }

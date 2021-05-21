@@ -9,14 +9,6 @@
     <el-card class="box-card">
       <div id="myChart" style="width:100%; height:300px"></div>
     </el-card>
-    <!-- <el-card class="box-card">
-      <div slot="header" class="clearfix">
-        <span>饼图</span>
-      </div>
-      <div class="text item">
-        <canvas id="pieChart" width="300" height="300"></canvas>
-      </div>
-    </el-card> -->
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <div class="block">
@@ -84,9 +76,6 @@ export default {
         ]
       }
       option && myChart.setOption(option)
-    },
-    initPieChart () {
-      // #1890FF', '#13C2C2', '#2FC25B', '#FACC14'
     },
     initLineChart () {
       let myChart = this.$echarts.init(document.getElementById('lineChart'))
@@ -181,11 +170,6 @@ export default {
       forTimeCount({ startDate: this.formData.startDate, endDate: this.formData.endDate, userId: JSON.parse(localStorage.getItem('userId')) }).then(res => {
         this.chartData = res.data
         this.initChart(this.chartData) // 更新柱状图表数据
-        // if (tag) {
-        //   this.initPieChart(this.filterData(this.chartData))
-        // } else {
-        //   pieChart.changeData(this.filterData(this.chartData)) // 更新图表数据
-        // }
       })
     },
     filterData (value) {
