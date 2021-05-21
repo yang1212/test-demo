@@ -19,7 +19,7 @@ export default new Router({
         {
           path: 'register',
           name: 'register',
-          component: () => import(/* webpackChunkName: 'login' */ '../views/memberInfo/registerPanel/index')
+          component: () => import(/* webpackChunkName: 'register' */ '../views/memberInfo/registerPanel/index')
         }
       ]
     },
@@ -27,22 +27,22 @@ export default new Router({
       path: '/billManager',
       name: 'billManager',
       redirect: 'billManager/home',
-      component: () => import(/* webpackChunkName: 'tab1' */ '../views/layout/index'),
+      component: () => import(/* webpackChunkName: 'home' */ '../views/layout/index'),
       children: [
         {
           path: 'home',
           name: 'home',
-          component: () => import(/* webpackChunkName: 'tab1' */ '../views/listDetailPage/index')
+          component: () => import(/* webpackChunkName: 'home' */ '../views/listDetailPage/index')
         },
         {
           path: 'chartData',
           name: 'chartData',
-          component: () => import(/* webpackChunkName: 'tab1' */ '../views/chartData/index')
+          component: () => import(/* webpackChunkName: 'chartData' */ '../views/chartData/index')
         },
         {
           path: 'memberInfo',
           name: 'memberInfo',
-          component: () => import(/* webpackChunkName: 'tab1' */ '../views/memberInfo/index')
+          component: () => import(/* webpackChunkName: 'memberInfo' */ '../views/memberInfo/index')
         }
       ]
     }
