@@ -1,6 +1,5 @@
 <template>
   <div class="container-box">
-    <div class="masklayer"></div>
     <router-view></router-view>
   </div>
 </template>
@@ -31,7 +30,7 @@ export default {
 .container-box {
   width: 100%;
   height: 100%;
-  background: url("../assets/images/loginBg.png");
+  // background: url("../assets/images/loginBg.png");
 }
 .masklayer {
   position: fixed;
