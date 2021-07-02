@@ -4,10 +4,6 @@
     <div class="content">
       <router-view></router-view>
       <div class="footer">
-        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43062402000140" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
-          <img :src="beiAnImg"/>
-          <span style="color:#939393;">湘公网安备 43062402000140号</span>
-        </a>
         <span style="display: block;color:#939393">湘ICP备2021002848号-1</span>
       </div>
     </div>

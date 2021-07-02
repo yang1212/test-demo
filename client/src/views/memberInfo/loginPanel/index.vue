@@ -5,7 +5,7 @@
       <span v-show="!showDefaultImg" class="el-icon-s-opportunity"></span>
     </div> -->
     <div class="login-img-info">
-      <img src="../../../assets/images/loginTag.png" class="login-img"/>
+      <!-- <img src="../../../assets/images/loginTag.png" class="login-img"/> -->
     </div>
     <el-card class="box-card">
       <el-form :model="formData" class="form-box">
