@@ -1,7 +1,7 @@
 <template>
   <div class="add-new-box">
-    <el-form :model="formData" class="form-data">
-      <el-form-item>
+    <el-form class="form-data" :model="formData" :ref="formDataRef" :rules="formDataRules">
+      <el-form-item prop="objName">
         <el-input v-model="formData.objName" placeholder="名称"></el-input>
       </el-form-item>
       <el-form-item class="select-form-item">
@@ -13,10 +13,10 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item>
+      <el-form-item prop="objPrice">
         <el-input v-model="formData.objPrice" placeholder="价格"></el-input>
       </el-form-item>
-      <el-form-item class="date-form-item">
+      <el-form-item class="date-form-item" prop="objDate">
         <el-date-picker
           v-model="formData.objDate"
           value-format="yyyy-MM-dd"
@@ -46,6 +46,17 @@ export default {
         objPrice: '',
         objDate: ''
       },
+      formDataRules: {
+        objName: [
+          { required: true, message: '请输入名称', trigger: 'blur' }
+        ],
+        objPrice: [
+          { required: true, message: '请输入价格', trigger: 'blur' }
+        ],
+        objDate: [
+          { required: true, message: '请选择日期', trigger: 'blur' }
+        ]
+      },
       obyTypeEnum: [],
       loading: false
     }
@@ -61,23 +72,24 @@ export default {
       'updateDetailList'
     ]),
     onSubmit () {
-      if (!this.formData.objName || !this.formData.objType || !this.formData.objPrice || !this.formData.objDate) {
-        this.$message.error('存在数据未填写')
-      } else {
-        this.loading = true
-        const userId = JSON.parse(localStorage.getItem('userId'))
-        this.formData.userId = userId
-        createBill(this.formData).then(res => {
-          billDetailList({userId: userId}).then(res => {
-            this.loading = false
-            this.$emit('close')
-            this.updateDetailList(res.data)
-            this.$router.push({
-              path: '/billManager'
+      this.$refs['formDataRef'].validate((valid) => {
+        if (valid) {
+          const userId = JSON.parse(localStorage.getItem('userId'))
+          this.formData.userId = userId
+          this.loading = true
+          createBill(this.formData).then(res => {
+            billDetailList({userId: userId}).then(res => {
+              this.loading = false
+              this.$emit('close')
+              this.$router.push({
+                path: '/billManager'
+              })
+              // 解决跳转首页时, 由于页面缓存，没用调用最新数据
+              this.updateDetailList(res.data)
             })
           })
-        })
-      }
+        }
+      })
     },
     onCancel () {
       this.$emit('close')

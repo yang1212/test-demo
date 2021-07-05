@@ -1,6 +1,5 @@
 import '@babel/polyfill'
 import Vue from 'vue'
-import 'normalize.css/normalize.css'// A modern alternative to CSS resets
 import { Button, Dialog, Dropdown, DropdownMenu, DropdownItem, Input, Select, Form, Timeline, TimelineItem, Card, Upload, DatePicker, FormItem, Message, Drawer, Option, Row, Col, Avatar } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 // 按需引入echarts

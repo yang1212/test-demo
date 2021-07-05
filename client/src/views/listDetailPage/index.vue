@@ -20,7 +20,7 @@
       <span>确定删除吗？</span>
       <span slot="footer" class="dialog-footer">
         <el-button @click="visible = false" size="mini">取 消</el-button>
-        <el-button type="primary" @click="deteleCurItem" size="mini">确 定</el-button>
+        <el-button type="primary" @click="sureDetele" size="mini">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -58,16 +58,11 @@ export default {
         this.updateDetailList(res.data)
       })
     },
-    goCountPage () {
-      this.$router.push({
-        path: 'chartData'
-      })
-    },
     handleDelete (index) {
       this.visible = true
       this.curIndex = index
     },
-    deteleCurItem () {
+    sureDetele () {
       const curItem = this.detailList.find((item, index) => index === this.curIndex)
       delListData({id: curItem._id}).then(res => {
         this.visible = false

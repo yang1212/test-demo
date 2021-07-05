@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import beiAnImg from '@/assets/images/beian.png'
 import navBar from '../components/navBar/index'
 
 export default {
@@ -31,8 +30,7 @@ export default {
   },
   data () {
     return {
-      showGoLoginPanel: false,
-      beiAnImg: beiAnImg
+      showGoLoginPanel: false
     }
   },
   created () {

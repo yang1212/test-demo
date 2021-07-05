@@ -2,12 +2,6 @@
   <div class="member-box">
     <div class="member-info">
       <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" class="member-avatar-default"></el-avatar>
-      <!-- <el-upload
-        class="upload-btn"
-        :action="uploadUrl"
-        :before-upload="beforeUpload">
-        <span>+</span>
-      </el-upload> -->
     </div>
     <div class="login-out">
       <i class="el-icon-edit-outline"></i>&nbsp;Hello, {{userName}}
@@ -19,7 +13,6 @@
 </template>
 
 <script>
-import { uploadImgFile } from '@server/imgServer'
 import { getMemberInfo } from '@server/index'
 
 export default {
@@ -39,16 +32,6 @@ export default {
       localStorage.removeItem('userId')
       this.$router.push({
         path: '/login'
-      })
-    },
-    beforeUpload (file) {
-      let fd = new FormData()
-      fd.append('file', file)
-      fd.append('name', file.name)
-      fd.append('uid', file.uid)
-      fd.append('userId', JSON.parse(localStorage.getItem('userId')))
-      uploadImgFile(fd).then(res => {
-        this.handleMemberInfo()
       })
     },
     handleMemberInfo () {

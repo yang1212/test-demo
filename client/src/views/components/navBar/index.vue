@@ -1,19 +1,25 @@
 <template>
   <div class="nav-box">
-    <div class="home-tag" @click="chooseLogo">Bill</div>
-    <div class="nav-list">
-      <!-- TO DO: 交互待优化 -->
-      <el-dropdown trigger="click">
-        <span class="el-dropdown-link">
-          <i class="el-icon-more"></i>
-        </span>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item  @click.native="handeAdd"><i class="el-icon-edit-outline"></i>&nbsp;新增数据</el-dropdown-item>
-          <el-dropdown-item  @click.native="handleChart"><i class="el-icon-pie-chart"></i>&nbsp;图表分析</el-dropdown-item>
-          <el-dropdown-item  @click.native="handleMember"><i class="el-icon-s-home"></i>&nbsp;个人信息</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
+    <span class="home-tag" @click="chooseLogo">B</span>
+    <div class="nav-list response-list">
+      <span @click.native="addData"><i class="el-icon-edit-outline"></i>&nbsp;新增</span>
+      <span @click.native="goChartPage"><i class="el-icon-pie-chart"></i>&nbsp;图表</span>
+      <span @click.native="goMemberPage"><i class="el-icon-s-home"></i>&nbsp;个人</span>
     </div>
+    <span class="el-icon-more more-icon response-icon" @click="openMore"></span>
+    <el-drawer
+      size="50%"
+      direction="ltr"
+      custom-class="nav-drawer"
+      ref="drawer"
+      destroy-on-close
+      :withHeader="false"
+      :modal="false"
+      :visible.sync="showNavPanel">
+      <div @click.native="addData" class="item-list"><i class="el-icon-edit-outline"></i>&nbsp;新增</div>
+      <div @click.native="goChartPage" class="item-list"><i class="el-icon-pie-chart"></i>&nbsp;图表</div>
+      <div @click.native="goMemberPage" class="item-list"><i class="el-icon-s-home"></i>&nbsp;个人</div>
+    </el-drawer>
     <el-drawer
       title="新增"
       append-to-body
@@ -29,7 +35,7 @@
 </template>
 
 <script>
-import addNew from './addNew'
+import addNew from '../addNew/index'
 
 export default {
   components: {
@@ -38,7 +44,8 @@ export default {
   name: 'navBar',
   data () {
     return {
-      showAddPanel: false
+      showAddPanel: false,
+      showNavPanel: false
     }
   },
   methods: {
@@ -47,21 +54,24 @@ export default {
         path: '/billManager'
       })
     },
-    handeAdd () {
+    addData () {
       this.showAddPanel = true
     },
-    handleChart () {
+    goChartPage () {
       this.$router.push({
         path: 'chartData'
       })
     },
-    handleMember () {
+    goMemberPage () {
       this.$router.push({
         path: 'memberInfo'
       })
     },
     closePanel () {
       this.showAddPanel = false
+    },
+    openMore () {
+      this.showNavPanel = true
     }
   }
 }
@@ -78,7 +88,7 @@ export default {
   height: 60px;
   line-height: 60px;
   z-index: 999;
-  .home-tag {
+  .home-logo {
     position: absolute;
     top: 3px;
     left: 20px;
@@ -88,11 +98,40 @@ export default {
   }
   .nav-list {
     float: right;
-    i {
-      font-size: 25px;
-      color: #fff;
-      margin: 20px 10px;
+    padding-right: 20px;
+    color: #fff;
+    font-size: 15px;
+    text-align: right;
+    span {
+      display: inline-block;
+      width: 80px;
     }
+  }
+  .more-icon {
+    position: absolute;
+    right: 20px;
+    top: 3px;
+    color: #fff;
+  }
+  /deep/ .nav-drawer {
+    .item-list {
+      padding-left: 15px;
+    }
+    .item-list:hover {
+      cursor: pointer;
+      background: #eee;
+    }
+  }
+}
+.response-icon {
+  display: none;
+}
+@media only screen and (max-width: 500px) {
+  .response-list {
+    display: none;
+  }
+  .response-icon {
+    display: block;
   }
 }
 </style>

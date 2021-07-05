@@ -1,19 +1,15 @@
 <template>
   <div class="login-box">
-    <!-- <div class="login-text">
-      <span v-show="showDefaultImg" class="el-icon-s-promotion" :class="{'img-rotate': showRotate}"></span>
-      <span v-show="!showDefaultImg" class="el-icon-s-opportunity"></span>
-    </div> -->
     <div class="login-img-info">
       <!-- <img src="../../../assets/images/loginTag.png" class="login-img"/> -->
     </div>
     <el-card class="box-card">
       <el-form :model="formData" class="form-box">
         <el-form-item>
-          <el-input v-model="formData.objName" placeholder="用户名" @input="changeObjName" @blur="blurObjName"></el-input>
+          <el-input v-model="formData.objName" placeholder="用户名: test"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-input v-model="formData.password" placeholder="密码" type="password" @focus="focusPassword" @blur="blurPassword"></el-input>
+          <el-input v-model="formData.password" placeholder="密码: 123" type="password"></el-input>
         </el-form-item>
         <p class="text-btn">
           还未注册账号？<span @click="onRegister" class="common-text">立即注册</span>
@@ -37,23 +33,21 @@ export default {
       formData: {
         objName: '',
         password: ''
-      },
-      showDefaultImg: true,
-      showRotate: false
+      }
     }
   },
   methods: {
     onLogin () {
       if (!this.formData.objName || !this.formData.password) {
         this.$message.error('请输入用户名和密码进行登录')
-        return true
+        return false
       }
       this.loading = true
       login(this.formData).then(res => {
         this.loading = false
         if (res.data.length === 0) {
           this.$message.error('请输入正确的用户名和密码进行登录')
-          return true
+          return false
         } else {
           localStorage.setItem('userId', JSON.stringify(res.data[0]._id))
           this.$router.push({
@@ -66,24 +60,11 @@ export default {
       this.$router.push({
         path: 'register'
       })
-    },
-    focusPassword () {
-      this.showDefaultImg = false
-    },
-    blurPassword () {
-      this.showDefaultImg = true
-    },
-    changeObjName () {
-      this.showRotate = true
-    },
-    blurObjName () {
-      this.showRotate = false
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import '../../../assets/index.scss';
 

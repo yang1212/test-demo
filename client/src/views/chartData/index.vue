@@ -6,9 +6,11 @@
         <el-col :span="10" :offset="2" class="col-input"><i class="el-icon-date"></i><el-input id="dateEnd" v-model="formData.endDate"></el-input></el-col>
       </el-form>
     </el-row>
+    <!-- 柱状图 -->
     <el-card class="box-card">
       <div id="myChart" style="width:100%; height:300px"></div>
     </el-card>
+    <!-- 折现图 -->
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <div class="block">
@@ -77,6 +79,36 @@ export default {
       }
       option && myChart.setOption(option)
     },
+    initDate (tag) {
+      let self = this
+      // eslint-disable-next-line no-new
+      new Rolldate({
+        el: '#dateStart',
+        format: 'YYYY-MM-DD',
+        confirm: function (date) {
+          self.formData.startDate = date
+          self.getCountData()
+        }
+      })
+      // eslint-disable-next-line no-new
+      new Rolldate({
+        el: '#dateEnd',
+        format: 'YYYY-MM-DD',
+        confirm: function (date) {
+          self.formData.endDate = date
+          self.getCountData()
+        }
+      })
+      // 根据日期选择初始化请求数据
+      this.getCountData('init')
+      this.handleYearChange(this.yearData)
+    },
+    getCountData (tag) {
+      forTimeCount({ startDate: this.formData.startDate, endDate: this.formData.endDate, userId: JSON.parse(localStorage.getItem('userId')) }).then(res => {
+        this.chartData = res.data
+        this.initChart(this.chartData) // 更新柱状图表数据
+      })
+    },
     initLineChart () {
       let myChart = this.$echarts.init(document.getElementById('lineChart'))
       let option
@@ -134,30 +166,6 @@ export default {
       }
       option && myChart.setOption(option)
     },
-    initDate (tag) {
-      let self = this
-      // eslint-disable-next-line no-new
-      new Rolldate({
-        el: '#dateStart',
-        format: 'YYYY-MM-DD',
-        confirm: function (date) {
-          self.formData.startDate = date
-          self.getCountData()
-        }
-      })
-      // eslint-disable-next-line no-new
-      new Rolldate({
-        el: '#dateEnd',
-        format: 'YYYY-MM-DD',
-        confirm: function (date) {
-          self.formData.endDate = date
-          self.getCountData()
-        }
-      })
-      // 根据日期选择初始化请求数据
-      this.getCountData('init')
-      this.handleYearChange(this.yearData)
-    },
     handleYearChange (year) {
       const startDate = this.format(new Date(year))
       const endDate = startDate.slice(0, 4) + '-12-31'
@@ -165,19 +173,6 @@ export default {
         this.lineChartData = res.data
         this.initLineChart()
       })
-    },
-    getCountData (tag) {
-      forTimeCount({ startDate: this.formData.startDate, endDate: this.formData.endDate, userId: JSON.parse(localStorage.getItem('userId')) }).then(res => {
-        this.chartData = res.data
-        this.initChart(this.chartData) // 更新柱状图表数据
-      })
-    },
-    filterData (value) {
-      const tempData = value.filter((item, index) => {
-        item.const = 'const'
-        return item.value > 0
-      })
-      return tempData
     },
     format (value) {
       if (!value) { return }
